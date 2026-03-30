@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APM — Assistant Property Manager | Help Us Build the Right Tool</title>
+  <meta name="description" content="APM (Assistant Property Manager) — we are building rental property accounting software designed by landlords. Help shape the product by sharing what features matter most to you.">
+  <meta name="keywords" content="assistant property manager, rental property accounting, landlord software, property management, Schedule E, rental income tracking, QuickBooks alternative for landlords">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--navy:#0B1D3A;--navy-mid:#132C54;--navy-light:#1A3A6B;--amber:#D4943A;--amber-light:#E8B96E;--amber-glow:rgba(212,148,58,0.15);--cream:#FAF8F5;--cream-dark:#F0EDE8;--charcoal:#1A1A1A;--slate:#4A5568;--silver:#94A3B8;--border:rgba(11,29,58,0.08);--success:#2D8B5F;--font-display:'DM Serif Display',Georgia,serif;--font-body:'DM Sans',-apple-system,sans-serif}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--charcoal);line-height:1.65;background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    .container{max-width:1120px;margin:0 auto;padding:0 24px}
+    section{position:relative}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,29,58,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,148,58,0.15)}
+    nav .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .logo{font-family:var(--font-display);font-size:1.35rem;color:var(--amber);text-decoration:none;letter-spacing:-0.01em}
+    .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+    .nav-links a{font-size:.875rem;font-weight:500;color:var(--silver);text-decoration:none;transition:color .2s;letter-spacing:.02em}
+    .nav-links a:hover{color:#fff}
+    .nav-cta{background:var(--amber)!important;color:var(--navy)!important;padding:8px 20px;border-radius:6px;font-weight:600!important;transition:all .2s!important}
+    .nav-cta:hover{background:var(--amber-light)!important;transform:translateY(-1px)}
+    .mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
+    .mobile-toggle span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;transition:all .3s}
+    .hero{background:var(--navy);padding:140px 0 100px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:800px;height:800px;background:radial-gradient(circle,rgba(212,148,58,0.06) 0%,transparent 70%);pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--amber),transparent);opacity:.3}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,148,58,0.12);border:1px solid rgba(212,148,58,0.25);padding:6px 16px;border-radius:100px;font-size:.8rem;font-weight:600;color:var(--amber);letter-spacing:.04em;text-transform:uppercase;margin-bottom:24px}
+    .hero-badge::before{content:'';width:6px;height:6px;background:var(--amber);border-radius:50%;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.2rem);line-height:1.15;color:#fff;margin-bottom:20px;letter-spacing:-.02em}
+    .hero h1 em{font-style:italic;color:var(--amber)}
+    .hero-sub{font-size:1.1rem;color:var(--silver);line-height:1.7;margin-bottom:36px;max-width:520px}
+    .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+    .hero-stats{display:flex;gap:40px;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08)}
+    .hero-stat{text-align:left}
+    .hero-stat-num{font-family:var(--font-display);font-size:1.8rem;color:var(--amber);line-height:1;margin-bottom:4px}
+    .hero-stat-label{font-size:.8rem;color:var(--silver);letter-spacing:.03em;text-transform:uppercase;font-weight:500}
+    .hero-preview{background:var(--navy-mid);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:28px;position:relative}
+    .hero-preview::before{content:'';position:absolute;inset:-1px;border-radius:13px;background:linear-gradient(135deg,rgba(212,148,58,0.2),transparent 50%);z-index:-1}
+    .preview-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .preview-title{font-size:.85rem;font-weight:600;color:var(--silver);letter-spacing:.04em;text-transform:uppercase}
+    .preview-badge-live{font-size:.7rem;font-weight:700;color:var(--amber);background:rgba(212,148,58,0.12);padding:3px 10px;border-radius:100px;letter-spacing:.05em}
+    .preview-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+    .preview-row:last-child{border-bottom:none}
+    .preview-label{font-size:.9rem;color:rgba(255,255,255,0.6)}
+    .preview-value{font-family:var(--font-display);font-size:1.1rem;color:#fff}
+    .preview-value.positive{color:var(--success)}
+    .preview-value.amber{color:var(--amber)}
+    .preview-chart{display:flex;align-items:flex-end;gap:6px;height:80px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06)}
+    .preview-bar{flex:1;background:linear-gradient(to top,var(--navy-light),var(--amber));border-radius:3px 3px 0 0;opacity:.7;transition:opacity .2s}
+    .preview-bar:hover{opacity:1}
+    .preview-chart-label{display:flex;justify-content:space-between;margin-top:8px}
+    .preview-chart-label span{font-size:.65rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.05em}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:8px;font-family:var(--font-body);font-size:.95rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .25s ease;letter-spacing:.01em}
+    .btn-primary{background:var(--amber);color:var(--navy)}
+    .btn-primary:hover{background:var(--amber-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,148,58,0.3)}
+    .btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.2)}
+    .btn-outline:hover{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.05)}
+    .btn-dark{background:var(--navy);color:#fff}
+    .btn-dark:hover{background:var(--navy-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(11,29,58,0.3)}
+    .btn-cream{background:#fff;color:var(--navy);border:1px solid var(--border)}
+    .btn-cream:hover{border-color:var(--amber);transform:translateY(-2px);box-shadow:0 8px 24px rgba(11,29,58,0.06)}
+    .section-label{font-size:.8rem;font-weight:700;color:var(--amber);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+    .section-title{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);color:var(--navy);margin-bottom:16px;letter-spacing:-.02em;line-height:1.2}
+    .section-sub{font-size:1.05rem;color:var(--slate);max-width:600px;line-height:1.7;margin-bottom:56px}
+    .pain-points{padding:100px 0;background:var(--cream)}
+    .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+    .pain-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:36px 28px;transition:all .3s ease;position:relative;overflow:hidden}
+    .pain-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber);transform:scaleX(0);transition:transform .3s ease}
+    .pain-card:hover{border-color:rgba(212,148,58,0.3);box-shadow:0 12px 40px rgba(11,29,58,0.06);transform:translateY(-4px)}
+    .pain-card:hover::before{transform:scaleX(1)}
+    .pain-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--amber);background:var(--amber-glow)}
+    .pain-card h3{font-family:var(--font-display);font-size:1.2rem;color:var(--navy);margin-bottom:12px;line-height:1.3}
+    .pain-card p{font-size:.92rem;color:var(--slate);line-height:1.65}
+    .vision{padding:100px 0;background:var(--navy);position:relative}
+    .vision::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--amber),transparent);opacity:.2}
+    .vision-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+    .vision-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:32px;transition:all .3s ease}
+    .vision-card:hover{background:rgba(255,255,255,0.06);border-color:rgba(212,148,58,0.2)}
+    .vision-num{font-family:var(--font-display);font-size:2rem;color:var(--amber);opacity:.4;line-height:1;margin-bottom:16px}
+    .vision-card h3{font-family:var(--font-display);font-size:1.15rem;color:#fff;margin-bottom:10px;line-height:1.3}
+    .vision-card p{font-size:.9rem;color:var(--silver);line-height:1.65}
+    .vision-card .badge{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-top:12px}
+    .badge-exploring{color:var(--amber);background:rgba(212,148,58,0.12);border:1px solid rgba(212,148,58,0.25)}
+    .badge-validated{color:var(--success);background:rgba(45,139,95,0.12);border:1px solid rgba(45,139,95,0.25)}
+    .reports{padding:100px 0;background:var(--cream-dark)}
+    .report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .report-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .3s ease}
+    .report-card:hover{border-color:rgba(212,148,58,0.3);box-shadow:0 12px 40px rgba(11,29,58,0.08);transform:translateY(-4px)}
+    .report-card-header{background:var(--navy);color:#fff;font-family:var(--font-display);font-size:1rem;padding:14px 20px}
+    .report-card-body{padding:20px}
+    .report-line{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:.82rem;color:var(--slate)}
+    .report-line.indent{padding-left:16px;font-size:.78rem;color:var(--silver)}
+    .report-line.muted{color:#CBD5E0;font-style:italic}
+    .report-line.total{font-weight:700;font-size:.88rem;color:var(--navy);padding-top:8px}
+    .report-line.section-head{font-weight:700;font-size:.82rem;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}
+    .report-amount{font-weight:600;white-space:nowrap}
+    .report-amount.positive{color:var(--success)}
+    .report-amount.negative{color:#C53030}
+    .report-divider{height:1px;background:var(--border);margin:8px 0}
+    .report-card-footer{padding:12px 20px;background:rgba(212,148,58,0.05);border-top:1px solid var(--border);font-size:.78rem;color:var(--amber);font-weight:600}
+    .story{padding:100px 0;background:var(--cream)}
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+    .story-content blockquote{font-family:var(--font-display);font-size:1.5rem;font-style:italic;color:var(--navy);line-height:1.45;margin-bottom:24px;padding-left:24px;border-left:3px solid var(--amber)}
+    .story-content p{font-size:1rem;color:var(--slate);line-height:1.75;margin-bottom:16px}
+    .story-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .story-metric{background:#fff;border:1px solid var(--border);border-radius:12px;padding:28px 24px;text-align:center;transition:all .3s}
+    .story-metric:hover{border-color:rgba(212,148,58,0.3);transform:translateY(-2px)}
+    .story-metric-num{font-family:var(--font-display);font-size:2rem;color:var(--amber);line-height:1;margin-bottom:6px}
+    .story-metric-label{font-size:.8rem;color:var(--slate);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+    .feedback{padding:100px 0;background:var(--navy);position:relative;overflow:hidden}
+    .feedback::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--amber),transparent);opacity:.3}
+    .feedback::after{content:'';position:absolute;bottom:-40%;left:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(212,148,58,0.05) 0%,transparent 70%);pointer-events:none}
+    .feedback-inner{max-width:640px;margin:0 auto;text-align:center;position:relative;z-index:1}
+    .feedback h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);color:#fff;margin-bottom:16px;letter-spacing:-.02em}
+    .feedback p{font-size:1.05rem;color:var(--silver);margin-bottom:24px;line-height:1.7}
+    .feedback-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+    .feedback-divider{display:flex;align-items:center;gap:16px;margin:36px 0;color:rgba(255,255,255,0.2);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+    .feedback-divider::before,.feedback-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.1)}
+    .waitlist-form{display:flex;gap:12px;max-width:480px;margin:0 auto 16px}
+    .waitlist-form input{flex:1;padding:14px 18px;border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.06);color:#fff;font-family:var(--font-body);font-size:.95rem;outline:none;transition:all .2s}
+    .waitlist-form input::placeholder{color:var(--silver)}
+    .waitlist-form input:focus{border-color:var(--amber);background:rgba(255,255,255,0.08)}
+    .waitlist-note{font-size:.8rem;color:rgba(255,255,255,0.3)}
+    .form-success{display:none;padding:20px;background:rgba(45,139,95,0.12);border:1px solid rgba(45,139,95,0.3);border-radius:8px;color:#fff;font-size:.95rem}
+    .oss-banner{padding:60px 0;background:var(--cream-dark);border-top:1px solid var(--border)}
+    .oss-inner{display:flex;align-items:center;justify-content:space-between;gap:40px}
+    .oss-text h3{font-family:var(--font-display);font-size:1.3rem;color:var(--navy);margin-bottom:8px}
+    .oss-text p{font-size:.92rem;color:var(--slate);line-height:1.6;max-width:560px}
+    .oss-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:8px;background:#fff;border:1px solid var(--border);font-size:.82rem;font-weight:600;color:var(--navy);text-decoration:none;transition:all .2s}
+    .oss-badge:hover{border-color:var(--amber);transform:translateY(-2px)}
+    .oss-badge svg{width:18px;height:18px}
+    footer{padding:48px 0;background:var(--navy);border-top:1px solid rgba(255,255,255,0.06)}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between}
+    .footer-left{font-size:.85rem;color:var(--silver)}
+    .footer-left a{color:var(--amber);text-decoration:none}
+    .footer-links{display:flex;gap:24px;list-style:none}
+    .footer-links a{font-size:.82rem;color:var(--silver);text-decoration:none;transition:color .2s}
+    .footer-links a:hover{color:#fff}
+    .fade-in{opacity:0;transform:translateY(24px);transition:all .6s cubic-bezier(0.16,1,0.3,1)}
+    .fade-in.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:900px){
+      .hero-grid,.story-grid{grid-template-columns:1fr;gap:40px}
+      .hero-preview{order:-1}
+      .pain-grid,.vision-grid{grid-template-columns:1fr}
+      .report-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
+      .oss-inner{flex-direction:column;text-align:center}
+      .footer-inner{flex-direction:column;gap:16px;text-align:center}
+    }
+    @media(max-width:640px){
+      .nav-links{display:none}
+      .mobile-toggle{display:block}
+      .nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--navy);padding:20px 24px;border-bottom:1px solid rgba(212,148,58,0.15);gap:16px}
+      .hero{padding:100px 0 60px}
+      .hero-stats{gap:24px;flex-wrap:wrap}
+      .waitlist-form{flex-direction:column}
+      .waitlist-form .btn{width:100%;justify-content:center}
+      .feedback-actions{flex-direction:column;align-items:center}
+      .story-metrics{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="#" class="logo">APM</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#vision">Vision</a></li>
+        <li><a href="#reports">Reports</a></li>
+        <li><a href="#story">Why Us</a></li>
+        <li><a href="#feedback" class="nav-cta">Share Feedback</a></li>
+      </ul>
+      <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge">Research Phase — We Want Your Input</div>
+          <h1>Your Properties, Your Numbers — <em>Available When You Need Them</em></h1>
+          <p class="hero-sub">We are building a property accounting app based on proven workflows and our own journey through the property management cycle. Before we finalize what to build, we want to hear from landlords and accountants about what actually matters.</p>
+          <div class="hero-ctas">
+            <a href="#feedback" class="btn btn-primary">Share Your Feedback</a>
+            <a href="#vision" class="btn btn-outline">See Our Vision</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><div class="hero-stat-num">1-50</div><div class="hero-stat-label">Units Supported</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">SFR</div><div class="hero-stat-label">Focus Market</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">Free</div><div class="hero-stat-label">Tier Planned</div></div>
+          </div>
+        </div>
+        <div class="hero-preview">
+          <div class="preview-header">
+            <span class="preview-title">Portfolio Summary</span>
+            <span class="preview-badge-live">Concept</span>
+          </div>
+          <div class="preview-row"><span class="preview-label">Gross Rental Income</span><span class="preview-value">$24,850</span></div>
+          <div class="preview-row"><span class="preview-label">Total Expenses</span><span class="preview-value">$16,420</span></div>
+          <div class="preview-row"><span class="preview-label">Net Operating Income</span><span class="preview-value positive">$8,430</span></div>
+          <div class="preview-row"><span class="preview-label">Rent Collected</span><span class="preview-value amber">18 of 20 units</span></div>
+          <div class="preview-chart" aria-hidden="true">
+            <div class="preview-bar" style="height:55%"></div><div class="preview-bar" style="height:70%"></div><div class="preview-bar" style="height:45%"></div><div class="preview-bar" style="height:80%"></div><div class="preview-bar" style="height:60%"></div><div class="preview-bar" style="height:90%"></div><div class="preview-bar" style="height:75%"></div><div class="preview-bar" style="height:65%"></div><div class="preview-bar" style="height:85%"></div><div class="preview-bar" style="height:70%"></div><div class="preview-bar" style="height:95%"></div><div class="preview-bar" style="height:78%"></div>
+          </div>
+          <div class="preview-chart-label"><span>Jan</span><span>Monthly NOI Trend</span><span>Dec</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pain-points" id="problems">
+    <div class="container">
+      <div class="section-label">The Problems We Are Solving</div>
+      <h2 class="section-title">Sound Familiar?</h2>
+      <p class="section-sub">These are the pain points we have experienced firsthand after decades of self-managing rental properties. We are building APM to address them — but we need to know if your experience matches ours.</p>
+      <div class="pain-grid">
+        <div class="pain-card fade-in">
+          <div class="pain-icon">01</div>
+          <h3>QuickBooks Was Not Built for Landlords</h3>
+          <p>You are paying for software that does not understand properties, leases, or Schedule E. You spend hours categorizing expenses that should be automatic. Setting up classes for each property is a nightmare.</p>
+        </div>
+        <div class="pain-card fade-in">
+          <div class="pain-icon">02</div>
+          <h3>Enterprise Tools Are Overkill</h3>
+          <p>AppFolio and Buildium charge $298+ minimums with per-unit fees designed for professional PM companies managing hundreds of units. You do not need a leasing CRM — you need to know if your properties are making money.</p>
+        </div>
+        <div class="pain-card fade-in">
+          <div class="pain-icon">03</div>
+          <h3>Flying Blind Until Tax Season</h3>
+          <p>You send receipts to your accountant and find out in April whether you made or lost money. No monthly visibility, no per-property performance tracking, no ability to make decisions in real time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vision" id="vision">
+    <div class="container">
+      <div class="section-label">What We Are Exploring</div>
+      <h2 class="section-title" style="color:#fff">Features Under Consideration</h2>
+      <p class="section-sub" style="color:var(--silver)">These are the capabilities we are evaluating for APM. Some are based on our own workflows, others on early conversations with landlords and accountants. Your feedback determines what gets built first.</p>
+      <div class="vision-grid">
+        <div class="vision-card fade-in">
+          <div class="vision-num">01</div>
+          <h3>AI-Powered Bank Transaction Import</h3>
+          <p>Upload your bank CSV and let AI categorize transactions automatically. The system learns your patterns over time — recurring vendors, property assignments, expense categories.</p>
+          <span class="badge badge-validated">Based on our workflow</span>
+        </div>
+        <div class="vision-card fade-in">
+          <div class="vision-num">02</div>
+          <h3>Receipt Capture with OCR</h3>
+          <p>Snap a photo of any receipt from your phone. AI extracts vendor, amount, and date, suggests the property and expense category. One tap to confirm. Receipt image stored for audit trail.</p>
+          <span class="badge badge-validated">Based on our workflow</span>
+        </div>
+        <div class="vision-card fade-in">
+          <div class="vision-num">03</div>
+          <h3>Monthly Financial Reports</h3>
+          <p>P&L statements, balance sheets, cash flow reports, property profitability analysis, mortgage and insurance tracking, depreciation schedules, rent roll, and Schedule E — generated automatically.</p>
+          <span class="badge badge-validated">Based on our workflow</span>
+        </div>
+        <div class="vision-card fade-in">
+          <div class="vision-num">04</div>
+          <h3>Multiple LLCs, One Dashboard</h3>
+          <p>Real double-entry accounting with multi-entity support. Each LLC gets its own chart of accounts, bank mappings, and reports. See consolidated or per-entity views. No cross-contamination.</p>
+          <span class="badge badge-validated">Based on our workflow</span>
+        </div>
+        <div class="vision-card fade-in">
+          <div class="vision-num">05</div>
+          <h3>Year-End CPA Package</h3>
+          <p>One click generates everything your accountant needs: P&L by entity, balance sheet, depreciation schedule, transaction ledger, receipt backup, and Schedule E mapping. CPA portal access included so your accountant can pull reports directly.</p>
+          <span class="badge badge-validated">Based on our workflow</span>
+        </div>
+        <div class="vision-card fade-in">
+          <div class="vision-num">06</div>
+          <h3>QuickBooks Data Import</h3>
+          <p>Export your QuickBooks file, upload it, and your transaction history, chart of accounts, and vendor list migrate over. No starting from zero. No losing years of financial data to switch platforms.</p>
+          <span class="badge badge-exploring">Exploring</span>
+        </div>
+        <div class="vision-card fade-in">
+          <div class="vision-num">07</div>
+          <h3>Tenant Communication and Work Orders</h3>
+          <p>Tenants message you through a portal, messaging app integration (Telegram, WhatsApp), or text — and a pending work order is created automatically. Track maintenance from request to contractor payment with full cost history per property.</p>
+          <span class="badge badge-exploring">Exploring</span>
+        </div>
+        <div class="vision-card fade-in">
+          <div class="vision-num">08</div>
+          <h3>Tenant Portal</h3>
+          <p>A simple page where tenants can submit maintenance requests, message their landlord, view payment history, and access lease information. Integrates with Zillow, Rentler, or whatever rent collection method you already use.</p>
+          <span class="badge badge-exploring">Exploring</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reports" id="reports">
+    <div class="container">
+      <div class="section-label">Financial Reports</div>
+      <h2 class="section-title">The Reports Your Accountant Wishes You Had</h2>
+      <p class="section-sub">Monthly financial statements generated automatically from your categorized transactions. This is the kind of reporting we are aiming to deliver — what matters most to you?</p>
+      <div class="report-grid">
+        <div class="report-card fade-in">
+          <div class="report-card-header">Profit & Loss Statement</div>
+          <div class="report-card-body">
+            <div class="report-line"><span>Gross Rental Income</span><span class="report-amount">$12,400</span></div>
+            <div class="report-line indent"><span>Unit 1 — 821 Palmer St</span><span class="report-amount">$1,650</span></div>
+            <div class="report-line indent"><span>Unit 2 — 1205 Elm Ave</span><span class="report-amount">$1,400</span></div>
+            <div class="report-line indent muted"><span>+ 6 more properties...</span><span></span></div>
+            <div class="report-divider"></div>
+            <div class="report-line"><span>Total Operating Expenses</span><span class="report-amount negative">($7,840)</span></div>
+            <div class="report-line indent"><span>Repairs & Maintenance</span><span class="report-amount negative">($2,150)</span></div>
+            <div class="report-line indent"><span>Insurance</span><span class="report-amount negative">($1,890)</span></div>
+            <div class="report-line indent"><span>Mortgage Interest</span><span class="report-amount negative">($3,200)</span></div>
+            <div class="report-divider"></div>
+            <div class="report-line total"><span>Net Operating Income</span><span class="report-amount positive">$4,560</span></div>
+          </div>
+          <div class="report-card-footer">Generated monthly per entity and consolidated</div>
+        </div>
+        <div class="report-card fade-in">
+          <div class="report-card-header">Cash Flow Statement</div>
+          <div class="report-card-body">
+            <div class="report-line"><span>Cash from Operations</span><span class="report-amount positive">$4,560</span></div>
+            <div class="report-line indent"><span>Rent Collected</span><span class="report-amount">$12,400</span></div>
+            <div class="report-line indent"><span>Operating Expenses Paid</span><span class="report-amount negative">($7,840)</span></div>
+            <div class="report-divider"></div>
+            <div class="report-line"><span>Cash from Financing</span><span class="report-amount negative">($2,800)</span></div>
+            <div class="report-line indent"><span>Mortgage Principal Payments</span><span class="report-amount negative">($2,800)</span></div>
+            <div class="report-divider"></div>
+            <div class="report-line"><span>Capital Expenditures</span><span class="report-amount negative">($0)</span></div>
+            <div class="report-divider"></div>
+            <div class="report-line total"><span>Net Cash Flow</span><span class="report-amount positive">$1,760</span></div>
+          </div>
+          <div class="report-card-footer">Know exactly where your cash goes every month</div>
+        </div>
+        <div class="report-card fade-in">
+          <div class="report-card-header">Balance Sheet</div>
+          <div class="report-card-body">
+            <div class="report-line section-head"><span>Assets</span><span></span></div>
+            <div class="report-line indent"><span>Operating Account (Chase)</span><span class="report-amount">$18,450</span></div>
+            <div class="report-line indent"><span>Security Deposit Account</span><span class="report-amount">$9,600</span></div>
+            <div class="report-line indent"><span>Property (Net of Depreciation)</span><span class="report-amount">$412,000</span></div>
+            <div class="report-divider"></div>
+            <div class="report-line section-head"><span>Liabilities</span><span></span></div>
+            <div class="report-line indent"><span>Mortgage Balances</span><span class="report-amount">$298,500</span></div>
+            <div class="report-line indent"><span>Security Deposits Held</span><span class="report-amount">$9,600</span></div>
+            <div class="report-divider"></div>
+            <div class="report-line total"><span>Owner's Equity</span><span class="report-amount positive">$131,950</span></div>
+          </div>
+          <div class="report-card-footer">Track equity growth across your entire portfolio</div>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:32px;font-size:.9rem;color:var(--slate)">Also planned: Schedule E preparation, depreciation schedules, rent roll, property profitability, mortgage tracking, insurance tracking, and work order history reports.</p>
+    </div>
+  </section>
+
+  <section class="story" id="story">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-content fade-in">
+          <div class="section-label">Why We Are Building This</div>
+          <blockquote>"We have been self-managing single-family rentals for decades. We tried every tool out there. Nothing worked the way landlords actually think."</blockquote>
+          <p>After years of fighting QuickBooks, cobbling together spreadsheets, and paying accountants to organize our own mess, we started building the system we actually needed. It began as a dashboard for managing our own SFR portfolio across multiple LLCs in the Virginia Beach market — and it proved that a better approach was possible.</p>
+          <p>Now we are aiming to build the app that works for every self-managing landlord — based on proven workflows and our own journey through the property management cycle. But we are not building in a vacuum. We want to hear from you first.</p>
+          <p>What are your biggest pain points? What reports do you actually need? What would make you switch from what you are using now? Your feedback shapes what we build.</p>
+          <div style="margin-top:24px"><a href="#feedback" class="btn btn-cream">Share Your Feedback</a></div>
+        </div>
+        <div class="story-metrics fade-in">
+          <div class="story-metric"><div class="story-metric-num">47</div><div class="story-metric-label">Database Tables</div></div>
+          <div class="story-metric"><div class="story-metric-num">16</div><div class="story-metric-label">Report Types</div></div>
+          <div class="story-metric"><div class="story-metric-num">80+</div><div class="story-metric-label">API Endpoints</div></div>
+          <div class="story-metric"><div class="story-metric-num">31K</div><div class="story-metric-label">Lines of Code</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feedback" id="feedback">
+    <div class="container">
+      <div class="feedback-inner">
+        <div class="section-label" style="text-align:center">Help Shape APM</div>
+        <h2>What Would You Want in a Property Management Tool?</h2>
+        <p>We are in the research phase — gathering feedback from landlords and accountants before we finalize what to build. Your input directly shapes the product. Pricing and feature tiers will be determined based on community feedback.</p>
+        <div class="feedback-actions">
+          <!-- INSTRUCTIONS: Replace # with your Google Forms survey URL -->
+          <a href="#" class="btn btn-primary" target="_blank" rel="noopener">Take Our 5-Minute Survey</a>
+          <!-- INSTRUCTIONS: Replace # with a mailto: or feedback form URL -->
+          <a href="#" class="btn btn-outline">Submit Feature Ideas</a>
+        </div>
+        <p style="font-size:.92rem;color:var(--silver);margin-bottom:8px">Are you a CPA who serves landlord clients? We would especially love your input on what a year-end package should include.</p>
+        <div class="feedback-divider">or join the waitlist for updates</div>
+        <!-- INSTRUCTIONS: Replace YOUR_FORM_ID with your Formspree form ID -->
+        <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="email" name="email" placeholder="Enter your email for updates" required aria-label="Email address">
+          <input type="hidden" name="_subject" value="New APM Waitlist Signup">
+          <button type="submit" class="btn btn-primary">Join Waitlist</button>
+        </form>
+        <div class="form-success" id="formSuccess">You are on the list. We will keep you updated as the project develops.</div>
+        <p class="waitlist-note">No spam. Just development updates and early access when we are ready.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="oss-banner">
+    <div class="container">
+      <div class="oss-inner">
+        <div class="oss-text">
+          <h3>Open-Source Landlord Tools on GitHub</h3>
+          <p>We maintain free, open-source libraries for the landlord developer community — bank CSV parsers, QuickBooks import tools, rental property calculators, and state landlord-tenant law datasets.</p>
+        </div>
+        <div>
+          <!-- INSTRUCTIONS: Replace # with your GitHub organization URL -->
+          <a href="#" class="oss-badge" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">&copy; 2026 <a href="#">APM</a> — Assistant Property Manager. Built by landlords in Virginia Beach, VA.</div>
+        <ul class="footer-links">
+          <li><a href="#vision">Vision</a></li>
+          <li><a href="#reports">Reports</a></li>
+          <li><a href="#story">Why Us</a></li>
+          <li><a href="#feedback">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer=new IntersectionObserver(e=>{e.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);observer.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+    const form=document.getElementById('waitlistForm'),success=document.getElementById('formSuccess');
+    form.addEventListener('submit',async e=>{e.preventDefault();const d=new FormData(form);try{const r=await fetch(form.action,{method:'POST',body:d,headers:{'Accept':'application/json'}});if(r.ok){form.style.display='none';success.style.display='block'}}catch(err){form.submit()}});
+    document.querySelectorAll('a[href^="#"]').forEach(l=>{l.addEventListener('click',e=>{const t=document.querySelector(l.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('navLinks').classList.remove('open')}})});
+  </script>
+</body>
+</html>
