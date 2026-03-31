@@ -143,8 +143,8 @@
     .footer-links{display:flex;gap:24px;list-style:none}
     .footer-links a{font-size:.82rem;color:var(--silver);text-decoration:none;transition:color .2s}
     .footer-links a:hover{color:#fff}
-    .fade-in{opacity:0;transform:translateY(24px);transition:all .6s cubic-bezier(0.16,1,0.3,1)}
-    .fade-in.visible{opacity:1;transform:translateY(0)}
+    .js-ready .fade-in{opacity:0;transform:translateY(24px);transition:all .6s cubic-bezier(0.16,1,0.3,1)}
+    .js-ready .fade-in.visible{opacity:1;transform:translateY(0)}
     @media(max-width:900px){
       .hero-grid,.story-grid{grid-template-columns:1fr;gap:40px}
       .hero-preview{order:-1}
@@ -433,7 +433,42 @@
     </div>
   </footer>
 
+
   <script>
-    const observer=new IntersectionObserver(e=>{e.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);observer.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-    document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
-    
+    // Scroll animations with Safari/iOS fallback
+    if (typeof IntersectionObserver !== "undefined") {
+      document.body.classList.add("js-ready");
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      document.querySelectorAll(".fade-in").forEach(function(el) {
+        observer.observe(el);
+      });
+      // Fallback: make everything visible after 3 seconds if observer fails
+      setTimeout(function() {
+        document.querySelectorAll(".fade-in").forEach(function(el) {
+          el.classList.add("visible");
+        });
+      }, 3000);
+    }
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener("click", function(e) {
+        var target = document.querySelector(link.getAttribute("href"));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          var nav = document.getElementById("navLinks");
+          if (nav) nav.classList.remove("open");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
