@@ -435,6 +435,21 @@
 
 
   <script>
+    // Deep-link JWT handoff from the APM mobile app
+    (function() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var tokenFromUrl = params.get('token');
+        if (tokenFromUrl) {
+          window.localStorage.setItem('apm_dashboard_token', tokenFromUrl);
+          window.__APM_DASHBOARD_TOKEN__ = tokenFromUrl;
+          window.history.replaceState({}, '', '/');
+        }
+      } catch (error) {
+        console.warn('Dashboard token handoff failed', error);
+      }
+    })();
+
     // Scroll animations with Safari/iOS fallback
     if (typeof IntersectionObserver !== "undefined") {
       document.body.classList.add("js-ready");
