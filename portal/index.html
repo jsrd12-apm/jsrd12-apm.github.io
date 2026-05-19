@@ -12,15 +12,6 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    iframe {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      background: #fff;
-    }
-
     .fallback {
       padding: 32px 20px;
       max-width: 440px;
@@ -56,18 +47,11 @@
     const safePath = rawPath.startsWith('/') ? rawPath : '/'
     const target = `${portalOrigin}${safePath}${window.location.search || ''}`
 
-    const frame = document.createElement('iframe')
-    frame.title = 'Tenant Portal'
-    frame.src = target
-    frame.allow = 'camera; microphone; clipboard-write'
-    document.body.appendChild(frame)
-
     const fallback = document.createElement('div')
     fallback.className = 'fallback'
-    fallback.innerHTML = `<h1>Tenant Portal</h1><p>If the portal does not load, open it directly.</p><a href="${target}" rel="noopener">Open Portal</a>`
-    setTimeout(() => {
-      if (!document.body.contains(frame)) document.body.appendChild(fallback)
-    }, 3000)
+    fallback.innerHTML = `<h1>Tenant Portal</h1><p>Opening your portal...</p><a href="${target}" rel="noopener">Open Portal</a>`
+    document.body.appendChild(fallback)
+    window.location.replace(target)
   </script>
 </body>
 </html>
