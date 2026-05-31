@@ -1,0 +1,1449 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>APM / PM Platform User Manual</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #516073;
+      --faint: #6a7788;
+      --line: #dbe3ea;
+      --paper: #ffffff;
+      --wash: #f6f8fb;
+      --navy: #0b1d3a;
+      --gold: #d4943a;
+      --blue: #155bb5;
+      --green: #198754;
+      --red: #b42318;
+      --orange: #b7791f;
+      --soft-blue: #f1f6ff;
+      --soft-green: #f0fdf4;
+      --soft-orange: #fff7ed;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--wash); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height: 1.56; }
+    header { background: var(--navy); border-bottom: 5px solid var(--gold); color: #fff; padding: 36px 24px; }
+    header .wrap, main { max-width: 1220px; margin: 0 auto; }
+    h1 { font-size: 34px; line-height: 1.12; margin: 0 0 8px; }
+    .subtitle { color: #dce7f5; font-size: 16px; max-width: 920px; margin: 0; }
+    .meta { color: #bdd0e6; font-size: 13px; margin-top: 12px; }
+    main { display: grid; grid-template-columns: 310px minmax(0, 1fr); gap: 22px; padding: 24px; }
+    nav { align-self: start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; max-height: calc(100vh - 32px); overflow: auto; padding: 16px; position: sticky; top: 16px; }
+    nav h2 { color: var(--faint); font-size: 13px; letter-spacing: .08em; margin: 0 0 10px; text-transform: uppercase; }
+    nav ol { margin: 0; padding-left: 20px; }
+    nav li { font-size: 13px; margin: 6px 0; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    article { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; padding: 24px; }
+    section { border-top: 1px solid var(--line); margin-top: 30px; padding-top: 26px; }
+    section:first-child { border-top: 0; margin-top: 0; padding-top: 0; }
+    h2 { color: var(--navy); font-size: 24px; line-height: 1.25; margin: 0 0 10px; }
+    h3 { color: var(--ink); font-size: 17px; margin: 22px 0 8px; }
+    h4 { color: var(--ink); font-size: 14px; letter-spacing: .05em; margin: 18px 0 6px; text-transform: uppercase; }
+    p { margin: 8px 0; }
+    ul, ol { margin-top: 8px; }
+    li { margin: 5px 0; }
+    code { background: #eef2f7; border: 1px solid #dde5ef; border-radius: 4px; color: #111827; font-size: 90%; padding: 1px 4px; }
+    table { border-collapse: collapse; font-size: 13px; margin: 12px 0; width: 100%; }
+    th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+    th { background: #f1f5f9; color: var(--navy); font-weight: 800; }
+    .callout { border-radius: 8px; margin: 12px 0; padding: 12px 14px; }
+    .note { background: var(--soft-blue); border: 1px solid #c9daf8; }
+    .success { background: var(--soft-green); border: 1px solid #bbf7d0; }
+    .warning { background: var(--soft-orange); border: 1px solid #fed7aa; }
+    .danger { background: #fff1f2; border: 1px solid #fecdd3; }
+    .tldr { background: #f8fafc; border-left: 4px solid var(--navy); border-radius: 4px; color: var(--ink); font-size: 14px; margin: 6px 0 14px; padding: 10px 12px; }
+    .tldr strong { color: var(--navy); letter-spacing: .04em; text-transform: uppercase; font-size: 11px; margin-right: 6px; }
+    .tag { background: #fff; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); display: inline-block; font-size: 12px; font-weight: 700; margin: 2px 4px 2px 0; padding: 2px 8px; }
+    .tag.default { background: #fffbeb; border-color: var(--gold); color: #7c4a03; }
+    .tag.timesaver { background: #f0fdf4; border-color: #86efac; color: #166534; }
+    .tag.outofscope { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+    .tag.harry { background: #eef4ff; border-color: #93c5fd; color: #1e3a8a; }
+    .where { color: var(--faint); font-size: 12px; font-style: italic; margin: 4px 0 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+    .card { background: #fbfdff; border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+    .card h3 { font-size: 15px; margin-top: 0; }
+    .steps > li { margin-bottom: 8px; }
+    .qa h3 { border-top: 1px solid var(--line); padding-top: 14px; }
+    .qa h3:first-child { border-top: 0; padding-top: 0; }
+    .qa p .harry-link { color: var(--blue); font-weight: 600; }
+    footer { border-top: 1px solid var(--line); color: var(--faint); font-size: 12px; margin-top: 28px; padding-top: 14px; }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+      nav { max-height: none; position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>APM / PM Platform User Manual</h1>
+      <p class="subtitle">A practical operating guide for landlords and property teams using the web dashboard, APM mobile app, and tenant portal.</p>
+      <p class="meta">Human-facing manual. Version: May 31, 2026. Published for Assistant Property Manager users; Harry uses the same approved content for in-product answers.</p>
+    </div>
+  </header>
+
+  <main>
+    <nav aria-label="Table of contents">
+      <h2>Table Of Contents</h2>
+      <ol>
+        <li><a href="#features">Software Features</a></li>
+        <li><a href="#roles">User Roles And Access</a></li>
+        <li><a href="#quickstart">Quickstart</a></li>
+        <li><a href="#onboarding">Onboarding Overview</a></li>
+        <li><a href="#company-setup">Set Up A Company</a></li>
+        <li><a href="#import-properties">Import Properties And Leases</a></li>
+        <li><a href="#communication-setup">Set Up Communication And Twilio</a></li>
+        <li><a href="#invoice-intake">Configure Invoice Intake</a></li>
+        <li><a href="#install-apm">Install And Sign In To APM</a></li>
+        <li><a href="#dashboard">Use The Web Dashboard</a></li>
+        <li><a href="#properties">Properties, Units, Tenants, And Leases</a></li>
+        <li><a href="#apm-property-detail">APM Property Detail Deep Dive</a></li>
+        <li><a href="#lease-documents">Lease Generator And Approvals</a></li>
+        <li><a href="#work-orders">Work Orders And Maintenance</a></li>
+        <li><a href="#messages-calls">Messages, Calls, And Voicemail</a></li>
+        <li><a href="#contacts-vendors">Contacts And Vendors</a></li>
+        <li><a href="#documents">Documents And Photos</a></li>
+        <li><a href="#tenant-portal">Tenant Portal</a></li>
+        <li><a href="#rent-financial">Rent And Invoice Scope (Beta)</a></li>
+        <li><a href="#reports">Reports</a></li>
+        <li><a href="#settings">Settings</a></li>
+        <li><a href="#sandbox">Sandbox And Live Mode</a></li>
+        <li><a href="#support">Report Bugs Or Suggestions</a></li>
+        <li><a href="#daily-ops">Recommended Operating Rhythm</a></li>
+        <li><a href="#harry">Harry Assistant</a></li>
+        <li><a href="#qa">Q&amp;A</a></li>
+      </ol>
+    </nav>
+
+    <article>
+      <section id="features" data-harry-section="software-features">
+        <h2>1. Software Features</h2>
+        <div class="tldr"><strong>TL;DR</strong>APM and PM Platform give landlords one place to manage properties, leases, tenants, work orders, messages, calls, documents, invoices, and operational reports. Online rent payments and full accounting are out of beta scope.</div>
+        <p>APM and PM Platform help a landlord manage rental property units from one operating system. The product combines the web dashboard, native APM app, tenant portal, dedicated phone/SMS communication, documents, leases, work orders, contacts, vendors, invoices, property expense tracking, and operational reports.</p>
+        <p>The core goal is simple: give landlords and tenants one clear place to communicate and one shared record for day-to-day property operations.</p>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Dashboard</h3>
+            <p>The web dashboard is the main office view. Use it for onboarding, importing leases, managing properties, editing lease records, reviewing work orders, scanning invoices, organizing documents, viewing reports, and changing account settings.</p>
+          </div>
+          <div class="card">
+            <h3>APM Mobile App</h3>
+            <p>The APM app is the field and communication view. Use it for messages, calls, work orders, property details, rent status (when enabled), invoice scanning, quick reports, contact lookup, and tenant/vendor communication.</p>
+          </div>
+          <div class="card">
+            <h3>Tenant Portal</h3>
+            <p>Tenants get a dedicated portal link where they can report work orders, view work order status, message the landlord, view lease documents, request lease changes, and request move-out.</p>
+          </div>
+          <div class="card">
+            <h3>Communication Hub</h3>
+            <p>A dedicated Twilio phone number can receive tenant SMS, outbound landlord SMS, inbound calls, voicemail, and app calls. Known tenant calls can be routed through an automated menu before ringing the landlord.</p>
+          </div>
+          <div class="card">
+            <h3>Harry Assistant</h3>
+            <p>Harry is the screen-aware in-product assistant. The launcher appears on both the dashboard and APM. Harry suggests next steps based on the current screen, explains features, and can navigate the user to the right place. See the <a href="#harry">Harry Assistant</a> section.</p>
+          </div>
+        </div>
+
+        <h3>Major Workflows Covered</h3>
+        <table>
+          <tr>
+            <th>Workflow</th>
+            <th>What The Software Handles</th>
+            <th>Main Place To Use It</th>
+          </tr>
+          <tr>
+            <td>Company setup</td>
+            <td>Operating states, LLCs, EINs, legal addresses, management model, lease defaults, signer defaults.</td>
+            <td>Dashboard onboarding and Dashboard &gt; Settings</td>
+          </tr>
+          <tr>
+            <td>Property and lease setup</td>
+            <td>Import leases from PDFs or CSVs, add manual rows, review extracted tenants, assign LLCs, create active lease records, and start renewals/addenda from active leases.</td>
+            <td>Dashboard onboarding, Dashboard property detail, APM property detail</td>
+          </tr>
+          <tr>
+            <td>Tenant communication</td>
+            <td>SMS threads, outbound replies, incoming calls, voicemail, tenant portal links, welcome texts, unread tracking, compose new messages.</td>
+            <td>APM Inbox / Call / Home / Compose and Dashboard &gt; Messages</td>
+          </tr>
+          <tr>
+            <td>Work orders</td>
+            <td>Create maintenance tickets, assign property/vendor, track priority/status/cost, attach invoices/photos, send tenant updates, archive when closed.</td>
+            <td>APM Work Orders, APM Property Detail, Dashboard &gt; Maintenance</td>
+          </tr>
+          <tr>
+            <td>Documents</td>
+            <td>Store leases, addendums, invoices, photos, inspections, insurance policies, statements, correspondence, and other files.</td>
+            <td>Dashboard &gt; Documents and property document tabs</td>
+          </tr>
+          <tr>
+            <td>Invoice intake</td>
+            <td>Scan invoice PDFs/images, email invoices to an intake address, match vendor/property/category, route to work orders or operational expense.</td>
+            <td>Dashboard &gt; Invoices and APM Invoice Scan</td>
+          </tr>
+          <tr>
+            <td>Property expense tracking</td>
+            <td>Track property-level repair, maintenance, vendor, invoice intake, utility, insurance, tax, and work-order costs so each property has an operating expense history.</td>
+            <td>APM Property Detail, APM &gt; Reports &gt; Property Expense, Dashboard &gt; Maintenance, Dashboard &gt; Reports</td>
+          </tr>
+          <tr>
+            <td>Time savers</td>
+            <td>Email invoices to the intake address, let APM pre-categorize them for review, use native lease signing by email or phone, and switch to Sandbox when you want to try features without touching production data.</td>
+            <td>Invoices, Lease Generator, Settings, Sandbox/Production toggle</td>
+          </tr>
+          <tr>
+            <td>Operational reports</td>
+            <td>Rent roll, work orders, property expenses, Schedule E, insurance, vacancy, work order aging, and rental evaluator from both APM and the dashboard.</td>
+            <td>Dashboard &gt; Reports and APM &gt; Reports</td>
+          </tr>
+          <tr>
+            <td>In-product assistance</td>
+            <td>Harry suggests next steps based on the current screen, drafts responses, opens the right page, and explains feature gates.</td>
+            <td>Harry launcher (dashboard bottom-right; APM available from Home / Settings)</td>
+          </tr>
+        </table>
+
+        <div class="callout warning">
+          <strong>Beta scope note:</strong> Online tenant rent collection, payment provider setup, bank import, reconciliation, P&amp;L, balance sheet, general ledger, depreciation, and 1099 reporting are <span class="tag outofscope">Out of beta scope</span>. Schedule E is available as a tax-planning report Harry can locate and explain, but Harry cannot give tax treatment or filing advice. Most landlord users should treat work orders, messages, leases, renewals/addenda, documents, invoice intake, property expenses, and operational reports as the default available scope.
+        </div>
+      </section>
+
+      <section id="roles" data-harry-section="roles-and-access">
+        <h2>2. User Roles And Access</h2>
+        <div class="tldr"><strong>TL;DR</strong>Landlords and team members work in dashboard and APM. Tenants only see their lease-specific portal link. Owner read-only is available where configured.</div>
+        <p>Access controls depend on account configuration. The system is organized around these user types.</p>
+        <table>
+          <tr>
+            <th>Role</th>
+            <th>Typical Access</th>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td>Landlord / account holder</td>
+            <td>Full portfolio operations, setup, properties, leases, work orders, messages, documents, reports, settings.</td>
+            <td>This is the main user who completes onboarding and installs APM.</td>
+          </tr>
+          <tr>
+            <td>Property manager or team member</td>
+            <td>Operational access based on invitation and role settings.</td>
+            <td>Use for people who manage work orders, tenants, vendors, or documents.</td>
+          </tr>
+          <tr>
+            <td>Owner / read-only viewer</td>
+            <td>Read-only property, work order, and document visibility where assigned.</td>
+            <td>Owner access should not change operational records unless explicitly configured.</td>
+          </tr>
+          <tr>
+            <td>Tenant</td>
+            <td>Tenant portal only: messages, maintenance requests, lease documents, move-out/change requests.</td>
+            <td>Tenant portal links are lease-specific and should only be shared with the correct tenant.</td>
+          </tr>
+        </table>
+      </section>
+
+      <section id="quickstart" data-harry-section="quickstart">
+        <h2>3. Quickstart</h2>
+        <div class="tldr"><strong>TL;DR</strong>Create account &rarr; finish onboarding (Company, Import, Communication, Review) &rarr; install APM &rarr; configure voice &rarr; verify with a test tenant before texting real tenants.</div>
+        <p>If you are setting up a new landlord account, follow this order.</p>
+        <ol class="steps">
+          <li><strong>Create or accept your account.</strong> Use the invite/register link, then sign in to the web dashboard.</li>
+          <li><strong>Start in Sandbox.</strong> First-time users are started in Sandbox mode with sample data so they can try the app, reports, work orders, messages, and settings without entering real portfolio data.</li>
+          <li><strong>Complete onboarding.</strong> Enter your operating states, company/LLC details, lease defaults, and import properties.</li>
+          <li><strong>Review imported leases.</strong> Confirm property address, tenant name, rent, deposit, lease start/end, city/state, phone, and LLC assignment before saving.</li>
+          <li><strong>Activate communication.</strong> Choose the preferred local area code, review the welcome SMS template, and request/activate the dedicated Twilio number.</li>
+          <li><strong>Install APM.</strong> Use the dashboard install card for iOS TestFlight or Android beta, then sign in with text code, password, Google, or the dashboard app handoff.</li>
+          <li><strong>Configure phone behavior.</strong> In APM, open Settings &gt; Voice and decide whether calls ring in the app, forward to a phone number, or use app-first-then-forward.</li>
+          <li><strong>Configure invoice intake.</strong> Open Dashboard &gt; Invoices to view the intake email address. Add authorized sender emails if you will forward invoices from another inbox.</li>
+          <li><strong>Invite tenants or send welcome texts.</strong> Send tenant portal links and welcome SMS only after the lease data, phone number, and message template are correct.</li>
+          <li><strong>Run the daily workflow.</strong> Use APM Home/Inbox for communications, Work Orders for maintenance, Property Detail for lease/unit records, and Dashboard Reports for portfolio review.</li>
+          <li><strong>Meet Harry.</strong> Open the Harry launcher on the dashboard (bottom-right) or in APM (Home action or Settings). Ask "What should I do next?" on any screen for context-aware suggestions.</li>
+        </ol>
+
+        <div class="callout success">
+          <strong>Recommended first test:</strong> Before texting real tenants, create or use a test tenant/lease, send yourself a welcome message, open the tenant portal, submit a work order, reply from APM, and confirm the record appears on both the Dashboard and APM.
+        </div>
+        <div class="callout note">
+          <strong>Mode reminder:</strong> Switch between Sandbox and Production from the dashboard mode control or APM Settings. Sandbox is for learning and demos. Production is for real tenants, properties, calls, leases, and invoices.
+        </div>
+      </section>
+
+      <section id="onboarding" data-harry-section="onboarding-overview">
+        <h2>4. Onboarding Overview</h2>
+        <div class="tldr"><strong>TL;DR</strong>Onboarding has four screens: Company Setup &rarr; Import &rarr; Communication &rarr; Review. New users start in Sandbox by default.</div>
+        <p>The onboarding wizard is the guided setup flow shown to new or incomplete accounts. It appears on the dashboard after sign-in and walks through four main screens:</p>
+        <ol>
+          <li><strong>Company Setup:</strong> operating states, LLC count, LLC details, management model, lease defaults.</li>
+          <li><strong>Import:</strong> upload leases, import from software/CSV, or add properties manually.</li>
+          <li><strong>Communication:</strong> choose local phone area code, review welcome SMS, activate Twilio communication.</li>
+          <li><strong>Review:</strong> confirm the account setup and finish to the dashboard.</li>
+        </ol>
+        <div class="callout note">
+          <strong>Default first-run mode:</strong> New users start in <span class="tag default">Sandbox</span>. This is preselected so landlords can explore APM, the dashboard, reports, work orders, messages, invoices, and settings without needing to input data first. Switch to Production when ready to enter or import real properties.
+        </div>
+        <h3>What To Have Ready Before Starting</h3>
+        <ul>
+          <li>List of all rental properties and units.</li>
+          <li>Each LLC name, state, EIN if available, and legal mailing address.</li>
+          <li>Lease PDFs or a CSV export from Stessa, TurboTenant, Baselane, or another system.</li>
+          <li>Tenant names, phone numbers, and email addresses.</li>
+          <li>Preferred area code for the dedicated APM phone number.</li>
+          <li>The email addresses that will forward invoices or receipts into APM.</li>
+        </ul>
+      </section>
+
+      <section id="company-setup" data-harry-section="company-setup">
+        <h2>5. Set Up A Company</h2>
+        <div class="tldr"><strong>TL;DR</strong>During onboarding: pick operating states, enter each LLC, choose management model, set lease defaults. After onboarding, edit in Dashboard &gt; Settings &gt; Profile &amp; LLCs.</div>
+        <p>Company setup tells the system which legal entities own the portfolio, which states are used for leases, and what defaults to apply when new leases are created.</p>
+
+        <h3>During Onboarding</h3>
+        <ol class="steps">
+          <li>Open the web dashboard and continue to the <strong>Company Setup</strong> screen.</li>
+          <li>In <strong>Operating states</strong>, select every state where you manage rental units. If you operate in more than one state, choose the primary/default state.</li>
+          <li>Enter the number of LLCs or ownership entities you use.</li>
+          <li>For each LLC, enter the legal LLC name, state, EIN if available, and any requested company details.</li>
+          <li>Choose the <strong>management model</strong>:
+            <ul>
+              <li><strong>Self-managed:</strong> the landlord/account holder manages the portfolio directly.</li>
+              <li><strong>Per LLC:</strong> each LLC can have its own management/signing information.</li>
+              <li><strong>Per property:</strong> management may vary property by property.</li>
+            </ul>
+          </li>
+          <li>Select lease defaults. Choose fixed term or month-to-month, security deposit policy, and whether to track insurance now or later.</li>
+          <li>Save or continue to the Import step.</li>
+        </ol>
+
+        <h3>Recommended Defaults</h3>
+        <table>
+          <tr><th>Default</th><th>Why It Is Preselected</th></tr>
+          <tr><td><span class="tag default">Self-managed</span> management model</td><td>Most beta landlords manage their own units first. This keeps setup simple and can be changed later if management differs by LLC or property.</td></tr>
+          <tr><td><span class="tag default">Fixed-term lease</span> when lease dates are found</td><td>Uploaded leases usually include a start and end date. Month-to-month can be selected when the lease has no fixed expiration.</td></tr>
+          <tr><td><span class="tag default">Security deposit equal to rent</span></td><td>This matches a common landlord pattern and fills faster. Change it when your lease uses a different deposit rule.</td></tr>
+          <tr><td><span class="tag default">Track insurance later</span></td><td>Lets users finish setup first, then add policy details from Settings or property detail when records are available.</td></tr>
+        </table>
+
+        <h3>After Onboarding: Edit Company Records</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Settings</strong>.</li>
+          <li>Use <strong>Profile &amp; LLCs</strong> to review the account holder email, phone, LLC records, EINs, and legal addresses.</li>
+          <li>If your mobile number is not verified, enter the phone number, request the verification code, then enter the 6-digit code.</li>
+          <li>Update each company legal address or EIN if needed.</li>
+          <li>Click <strong>Save Company Settings</strong>.</li>
+        </ol>
+
+        <h3>Configure Lease Signer Defaults</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Settings &gt; Lease Defaults</strong>.</li>
+          <li>Choose whether to use one global landlord/manager signer or per-LLC signer overrides.</li>
+          <li>Enter default landlord/manager name, email, and phone.</li>
+          <li>If using per-LLC overrides, enter the correct signer name, email, and phone for each LLC.</li>
+          <li>Confirm enabled states and default state.</li>
+          <li>Click <strong>Save Lease Settings</strong>.</li>
+        </ol>
+
+        <div class="callout note">
+          <strong>Why this matters:</strong> Lease generation, addendums, tenant portal records, and reports all rely on correct company, LLC, state, and signer data.
+        </div>
+      </section>
+
+      <section id="import-properties" data-harry-section="import-properties-and-leases">
+        <h2>6. Import Properties And Leases</h2>
+        <div class="tldr"><strong>TL;DR</strong>Three paths: upload lease PDFs, import CSV from Stessa/TurboTenant/Baselane/Other, or add rows manually. Review every extracted field before confirming.</div>
+        <p>The Import screen creates the starting portfolio. You can upload lease PDFs, import from a CSV/export, or add rows manually.</p>
+
+        <h3>Option A: Upload Lease PDFs</h3>
+        <ol class="steps">
+          <li>In onboarding, open the <strong>Import</strong> step and choose <strong>Upload Leases</strong>.</li>
+          <li>Select one or more lease PDFs.</li>
+          <li>Wait for extraction. The system reads the lease and suggests property address, tenant, rent, deposit, dates, city/state, unit, and contact details.</li>
+          <li>Review every extracted field. Pay special attention to address, tenant legal name, phone, email, rent, lease start/end, deposit, and LLC.</li>
+          <li>If city or state is missing, fill it manually. Zip lookup may suggest city/state when available.</li>
+          <li>Correct low-confidence fields before continuing.</li>
+          <li>Confirm the properties and leases.</li>
+        </ol>
+
+        <h3>Option B: Import From Software</h3>
+        <ol class="steps">
+          <li>In the Import step, choose <strong>Import from Software</strong>.</li>
+          <li>Select the source if known: Stessa, TurboTenant, Baselane, or Other. Auto-detect can be used if you are not sure.</li>
+          <li>Upload the CSV export.</li>
+          <li>Review mapped columns and imported rows.</li>
+          <li>Correct any address, tenant, rent, or status errors.</li>
+          <li>Confirm the import.</li>
+        </ol>
+
+        <h3>Option C: Add Manually</h3>
+        <ol class="steps">
+          <li>In the Import step, choose <strong>Add Manually</strong>.</li>
+          <li>Enter the street address, unit if applicable, tenant name, tenant phone, rent, zip, city, state, and LLC.</li>
+          <li>Add one row per unit or lease.</li>
+          <li>Confirm when the list is complete.</li>
+        </ol>
+
+        <h3>Add More Properties Later</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Settings &gt; Imports &amp; Setup</strong>.</li>
+          <li>Choose <strong>Add Additional Properties</strong>.</li>
+          <li>Select whether the properties belong to an existing LLC or a new LLC.</li>
+          <li>Continue to the import flow and follow the same review steps.</li>
+        </ol>
+
+        <div class="callout warning">
+          <strong>Avoid duplicate leases:</strong> If you are replacing or re-importing data, use the Settings re-run setup options carefully. <strong>Add properties</strong> preserves existing records. <strong>Reimport</strong> may replace properties/tenants while keeping LLCs and phone number. <strong>Fresh</strong> deletes data and should only be used intentionally.
+        </div>
+      </section>
+
+      <section id="communication-setup" data-harry-section="communication-and-twilio">
+        <h2>7. Set Up Communication And Twilio</h2>
+        <div class="tldr"><strong>TL;DR</strong>Pick area code &rarr; review welcome SMS &rarr; activate number. Then in Dashboard &gt; Settings &gt; Twilio Number or APM &gt; Settings &gt; Voice, choose incoming-call routing, unknown-caller mode, tenant menu profile, and quiet times.</div>
+        <p>The communication setup gives the account a dedicated APM phone number for tenant SMS, inbound calls, voicemail, and app calling. This is separate from the landlord's personal phone number.</p>
+
+        <h3>Activate The Dedicated Number During Onboarding</h3>
+        <ol class="steps">
+          <li>Open the onboarding <strong>Communication</strong> step.</li>
+          <li>Enter the preferred 3-digit area code. Use the state suggestions if you want a local number near the rental portfolio.</li>
+          <li>Review the welcome SMS template. Supported variables include <code>{tenant_name}</code>, <code>{landlord_name}</code>, and <code>{property_address}</code>.</li>
+          <li>Click the activation/provision button.</li>
+          <li>If the account requires approval, the status will show pending until the number is approved and provisioned.</li>
+          <li>After the number is active, choose whether to send welcome texts immediately or later.</li>
+        </ol>
+
+        <h3>Before You Text Tenants</h3>
+        <ul>
+          <li>Confirm tenant names and phone numbers are correct.</li>
+          <li>Confirm every tenant is attached to the correct property/unit/lease.</li>
+          <li>Confirm the welcome SMS says what you want.</li>
+          <li>Confirm the APM app is installed and signed in.</li>
+          <li>Confirm voice settings are configured in APM.</li>
+          <li>Send a test message to yourself first if possible.</li>
+        </ul>
+
+        <h3>Set Incoming Call Behavior</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Settings &gt; Twilio Number</strong>, or open <strong>APM &gt; Settings &gt; Voice</strong>.</li>
+          <li>Confirm the dedicated APM phone number and provisioning status.</li>
+          <li>Under <strong>How incoming calls are received</strong>, choose one:
+            <ul>
+              <li><strong>Use Twilio app</strong> <span class="tag default">Default</span>: calls ring in APM over VoIP. Preselected because it keeps tenant calls inside the APM communication record.</li>
+              <li><strong>Forward to local number:</strong> calls forward to the configured phone number.</li>
+              <li><strong>Twilio app, then local number if unanswered:</strong> APM rings first, then forwards if unanswered.</li>
+            </ul>
+          </li>
+          <li>Choose <strong>Unknown Caller Mode</strong>:
+            <ul>
+              <li><strong>Screen:</strong> ask the caller to identify themselves before routing.</li>
+              <li><strong>Voicemail:</strong> send unknown callers to voicemail.</li>
+              <li><strong>Reject:</strong> reject unknown callers.</li>
+              <li><strong>Allow:</strong> allow unknown callers through based on routing mode.</li>
+            </ul>
+          </li>
+          <li>Choose <strong>Tenant Calls</strong>:
+            <ul>
+              <li><strong>Automated tenant menu</strong> <span class="tag default">Default</span>: tenants hear approved menu options first. Preselected because it pushes maintenance and lease requests into the portal instead of scattered voicemail.</li>
+              <li><strong>Ring APM / phone during open hours:</strong> tenant calls ring according to voice mode during open hours. Quiet times still play the outside-hours menu.</li>
+            </ul>
+          </li>
+          <li>Click <strong>Save Twilio Settings</strong> or <strong>Save voice settings</strong>.</li>
+        </ol>
+
+        <h3>Tenant Call Menu</h3>
+        <p>When a known tenant calls the dedicated number and tenant menu is enabled, APM plays one of the approved menu scripts. Landlords choose from preselected profiles; the menu text is not free-form editable because tenant-facing campaign language is controlled.</p>
+        <table>
+          <tr><th>Menu Profile</th><th>Tenant Hears</th><th>Why To Use It</th></tr>
+          <tr><td><span class="tag default">Default</span> Portal-first menu</td><td>Press 1 for a tenant portal link, Press 2 to leave voicemail, Press 3 to hear options again.</td><td>Best default. Sends maintenance, lease, and change requests into the tenant portal.</td></tr>
+          <tr><td>Portal plus connect option</td><td>Press 1 for a tenant portal link, Press 2 to leave voicemail, Press 3 to connect to the landlord.</td><td>Use when you want tenants to self-serve first but still offer a direct connection.</td></tr>
+          <tr><td>Maintenance-focused menu</td><td>Press 1 for a link to report maintenance or view the lease in the portal, Press 2 for voicemail, Press 3 to hear options again.</td><td>Use when the phone number is primarily for maintenance intake.</td></tr>
+        </table>
+
+        <h3>Quiet Times</h3>
+        <p><span class="tag default">Default</span> Tenant quiet times are enabled from <strong>8:00 PM to 8:00 AM</strong> and apply on weekends. This protects the landlord from routine calls outside normal hours while still giving tenants a way to report maintenance, get their portal link, or leave a voicemail.</p>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Settings &gt; Twilio Number</strong>.</li>
+          <li>Keep <strong>Enable tenant quiet times</strong> on unless you want tenant calls to ring at all hours.</li>
+          <li>Adjust start time, end time, weekend behavior, or timezone if your operating schedule is different.</li>
+          <li>During quiet time, tenants hear: "Hello [tenant], you've reached us outside normal hours..." followed by the selected approved menu options.</li>
+        </ol>
+
+        <h3>Decide Whether Tenants Can Ring The Phone</h3>
+        <ol class="steps">
+          <li>If you want tenants to use the portal first, keep <strong>Automated tenant menu</strong> selected and use the Portal-first menu.</li>
+          <li>If you want tenants to reach you directly during business hours, select <strong>Ring APM / phone during open hours</strong>, then choose whether calls ring APM, forward, or both.</li>
+          <li>Keep quiet times enabled if routine tenant calls should not ring after hours.</li>
+          <li>If you want emergency or favorite contacts to bypass do-not-disturb, use the routing controls on APM Home if available.</li>
+          <li>If you want unknown callers screened, set Unknown Caller Mode to <strong>Screen</strong>.</li>
+          <li>If you want unknown callers to leave a message only, set Unknown Caller Mode to <strong>Voicemail</strong>.</li>
+        </ol>
+
+        <div class="callout note">
+          <strong>Shared setting:</strong> Dashboard &gt; Settings &gt; Twilio Number and APM voice settings use the same Twilio configuration record. A change in one place is reflected by the other after refresh.
+        </div>
+      </section>
+
+      <section id="invoice-intake" data-harry-section="invoice-intake">
+        <h2>8. Configure Invoice Intake</h2>
+        <div class="tldr"><strong>TL;DR</strong>Find intake email in Dashboard &gt; Invoices. Authorize sender emails (account holder is authorized by default). Forward invoices in or use APM invoice scan. Review extracted fields before routing.</div>
+        <p>Invoice intake lets landlords collect invoices and receipts by upload or email. The system scans PDF/image files, extracts vendor/amount/date/category/property, and holds drafts for review before routing them.</p>
+        <div class="callout success">
+          <strong><span class="tag timesaver">Time saver</span> Email invoices instead of manually entering them.</strong> When you forward invoices to the intake email, APM scans them and places them in the invoice review queue already matched or suggested by vendor, property, category, amount, and date. You review and approve before anything is routed.
+        </div>
+
+        <h3>Find The Intake Email Address</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Invoices</strong>.</li>
+          <li>Look near the top of the page for the invoice intake email address.</li>
+          <li>Use that address when forwarding invoices or setting mailbox forwarding rules.</li>
+          <li>In APM, open <strong>Settings &gt; Account</strong> to view the intake address if displayed there.</li>
+        </ol>
+
+        <h3>Configure Authorized Senders And Aliases</h3>
+        <p><span class="tag default">Default</span> The account holder email is normally authorized first because it is the safest starting point. Add additional authorized sender emails if invoices will come from a bookkeeper, owner, property manager, LLC inbox, vendor forwarding rule, or scanner service.</p>
+        <ol class="steps">
+          <li>List every email address that will forward invoices or receipts.</li>
+          <li>Decide whether you need one shared intake alias or multiple aliases for different LLCs or workflows.</li>
+          <li>If the dashboard does not show sender/alias controls yet, request the additional aliases or authorized senders during onboarding or from support.</li>
+          <li>After an email is authorized, test by forwarding one simple invoice PDF and confirming it appears in the Invoices queue.</li>
+        </ol>
+
+        <div class="callout note">
+          <strong>Example:</strong> The main landlord email can be authorized, and an additional address such as <code>bookkeeping@example.com</code> can also be authorized so the bookkeeper can forward invoices directly. A separate LLC inbox can also be authorized when invoices are received there.
+        </div>
+
+        <h3>Scan Or Upload An Invoice</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Invoices</strong>.</li>
+          <li>Click <strong>Upload from photos/files</strong>.</li>
+          <li>Select a PDF or image.</li>
+          <li>Review extracted vendor, total, date, invoice number, category, property, and work order if suggested.</li>
+          <li>Check duplicate warnings before saving.</li>
+          <li>Choose a route:
+            <ul>
+              <li><strong>Save invoice only:</strong> stores the document and invoice record.</li>
+              <li><strong>Create work order:</strong> creates or connects the invoice to maintenance work.</li>
+              <li><strong>Track as operational expense:</strong> attaches the invoice to a property for expense reporting.</li>
+              <li><strong>Archive:</strong> keeps it out of the active queue.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>Use APM Invoice Scan</h3>
+        <ol class="steps">
+          <li>Open APM Home or the relevant property/work order screen.</li>
+          <li>Tap the invoice scan/upload action.</li>
+          <li>Take a photo or choose a file.</li>
+          <li>Review extracted fields before confirming.</li>
+          <li>Route the invoice to a work order, document-only record, operational expense, or archive.</li>
+        </ol>
+      </section>
+
+      <section id="install-apm" data-harry-section="install-and-login-apm">
+        <h2>9. Install And Sign In To APM</h2>
+        <div class="tldr"><strong>TL;DR</strong>Install from the dashboard install card (iOS TestFlight or Android beta). Sign in with text code, password, Google, or dashboard handoff. Confirm App Mode in Settings &gt; Account.</div>
+        <p>The APM native app is installed from the dashboard install card after onboarding or from the beta invitation instructions.</p>
+
+        <h3>Install On iPhone</h3>
+        <ol class="steps">
+          <li>Open the dashboard on your computer or phone.</li>
+          <li>Find the APM install card on the dashboard.</li>
+          <li>Choose the iOS TestFlight option.</li>
+          <li>Install TestFlight if prompted.</li>
+          <li>Install the APM beta app from TestFlight.</li>
+        </ol>
+
+        <h3>Install On Android</h3>
+        <ol class="steps">
+          <li>Open the dashboard install card.</li>
+          <li>Choose the Android beta option.</li>
+          <li>Follow the install instructions for the Android build.</li>
+        </ol>
+
+        <h3>Sign-In Methods</h3>
+        <table>
+          <tr><th>Method</th><th>How It Works</th><th>When To Use It</th></tr>
+          <tr><td>Text one-time code</td><td>Enter your mobile number, receive a code, then enter the code in APM.</td><td>Best for mobile-first login after your phone is verified.</td></tr>
+          <tr><td>Password login</td><td>Enter your email or phone and password.</td><td>Use when you already know your dashboard credentials.</td></tr>
+          <tr><td>Google sign-in</td><td>Authenticate with the connected Google account when enabled.</td><td>Use if your account was created or linked with Google.</td></tr>
+          <tr><td>Dashboard handoff</td><td>The dashboard opens APM with a secure handoff/bootstrap link.</td><td>Use when installing from the dashboard and the handoff is offered.</td></tr>
+        </table>
+
+        <h3>Confirm App Mode</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Settings &gt; Account &gt; App Mode</strong>.</li>
+          <li>Confirm <strong>App Mode</strong> is set to Production for real portfolio work.</li>
+          <li>Use Sandbox only when practicing or demoing with test data.</li>
+        </ol>
+      </section>
+
+      <section id="dashboard" data-harry-section="dashboard-usage">
+        <h2>10. Use The Web Dashboard</h2>
+        <div class="tldr"><strong>TL;DR</strong>Dashboard is the desktop home for setup, imports, deep editing, documents, leases, work orders, messages, contacts, settings, and reports. Use it for anything that doesn't fit on a phone screen.</div>
+        <p>The dashboard is the best place for portfolio review, detailed editing, imports, documents, and reports.</p>
+
+        <h3>Main Navigation</h3>
+        <table>
+          <tr><th>Navigation Item</th><th>Use It For</th></tr>
+          <tr><td>Dashboard (home)</td><td>Portfolio overview, operational queues, lease view, APM install card, communication status, quick property review.</td></tr>
+          <tr><td>Leases</td><td>Active lease list, lease documents, renewals, addendums, approval/signing requests, reminders, lease generator.</td></tr>
+          <tr><td>Maintenance</td><td>Portfolio-wide work orders, vendor assignment, invoice attachment, status tracking.</td></tr>
+          <tr><td>Messages</td><td>Tenant/vendor SMS conversations and unread communication.</td></tr>
+          <tr><td>Invoices</td><td>Invoice intake email, uploaded/scanned invoices, review queue, routing.</td></tr>
+          <tr><td>Documents</td><td>All documents and lease generator access.</td></tr>
+          <tr><td>Contacts</td><td>Tenants, vendors, prior contacts, general contacts, favorites, and contact filtering.</td></tr>
+          <tr><td>Reports</td><td>Operational reports for rent roll, work orders, property expenses, Schedule E, insurance, vacancy, and rental evaluator.</td></tr>
+          <tr><td>Settings</td><td>Profile, LLCs, lease defaults, Twilio number, imports/setup, market data, help tips. Use the Settings gear in the dashboard header for quick access.</td></tr>
+        </table>
+
+        <h3>Dashboard Views</h3>
+        <ul>
+          <li><strong>Overview:</strong> summary KPIs, property snapshot, needs-attention items, maintenance and lease risk.</li>
+          <li><strong>Operator:</strong> dense work view for properties, rent exceptions, work exceptions, occupancy, market data, and property controls.</li>
+          <li><strong>Leases:</strong> lease-focused view for active leases, expiring soon, rent follow-up, vacancies, and documents.</li>
+        </ul>
+
+        <h3>Upload A Document From The Dashboard Header</h3>
+        <ol class="steps">
+          <li>Click the upload document action in the top-right dashboard area.</li>
+          <li>Select the file.</li>
+          <li>Choose category, property, and notes if prompted.</li>
+          <li>Save and confirm it appears under Documents or the selected property.</li>
+        </ol>
+      </section>
+
+      <section id="properties" data-harry-section="properties-units-tenants-leases">
+        <h2>11. Properties, Units, Tenants, And Leases</h2>
+        <div class="tldr"><strong>TL;DR</strong>Property Detail combines property data, unit file, tenants, leases, work orders, messages, documents, photos, inspections, and operational expense snapshot.</div>
+        <p>Property Detail is the main record for a rental unit. It combines property data, unit file, tenants, leases, work orders, messages, documents, photos, inspections, and operational expense snapshot.</p>
+
+        <h3>Open A Property</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard</strong> and click a property row/card, or open <strong>APM &gt; Properties</strong> and tap a property.</li>
+          <li>Confirm the address, city/state, LLC, occupancy, and unit information.</li>
+          <li>Use the tabs or sections for Overview, Unit File, Work Orders, Messages, Documents, Photos, and Inspections.</li>
+        </ol>
+
+        <h3>Edit Property Details In Dashboard</h3>
+        <ol class="steps">
+          <li>Open the property detail page.</li>
+          <li>In Overview, find the <strong>Property Details</strong> section.</li>
+          <li>Edit fields such as property type, bedrooms, square feet, assessed value, purchase data, loan/equity details, or insurance.</li>
+          <li>Save the section.</li>
+        </ol>
+
+        <h3>Use The Unit File</h3>
+        <ol class="steps">
+          <li>Open the property detail page.</li>
+          <li>Open the <strong>Unit File</strong> tab.</li>
+          <li>Record systems such as HVAC, water heater, roof, appliances, plumbing, electrical, and system notes.</li>
+          <li>Add inspection schedule and reminders when needed.</li>
+          <li>Save the unit file so future work orders and inspections have context.</li>
+        </ol>
+
+        <h3>Add Or Edit A Lease / Tenant In Dashboard</h3>
+        <ol class="steps">
+          <li>Open the property detail page.</li>
+          <li>In <strong>Tenants &amp; Leases</strong>, click <strong>New Lease</strong>, <strong>Edit Lease</strong>, or <strong>Terminate Lease</strong>.</li>
+          <li>Enter tenant name, phone, email, monthly rent, lease start/end, lease type, deposit, rent due day, late fee amount/grace, status, past due, and pets.</li>
+          <li>Save the lease.</li>
+          <li>Confirm the property/unit occupancy updates and the tenant appears in Contacts and Messages.</li>
+        </ol>
+
+        <h3>Add Or Edit A Lease / Tenant In APM</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Properties</strong>.</li>
+          <li>Tap the property.</li>
+          <li>Use <strong>Add / Edit Lease</strong> to create or update a lease, or <strong>Add Tenant</strong> to add tenant contact/lease information to an existing property.</li>
+          <li>If the property is occupied and you are replacing the lease, APM asks whether the current tenants are moving out.</li>
+          <li>If they are moving out, enter the current lease end or move-out date.</li>
+          <li>Enter the new tenant name, phone, email, rent, deposit, rent due day, late grace days, late fee amount, lease type, start date, and end date if fixed term.</li>
+          <li>Save and refresh. The change should appear in both APM and the web dashboard.</li>
+        </ol>
+
+        <h3>Terminate Or Replace A Lease</h3>
+        <ol class="steps">
+          <li>Open the property in Dashboard or APM.</li>
+          <li>Confirm whether the current lease is ending, the tenant is moving out, or you are only correcting data.</li>
+          <li>If the lease is ending, enter the expiration/move-out date.</li>
+          <li>Create the new lease only after the existing tenant status is clear.</li>
+          <li>Confirm the old tenant is no longer active for the unit and the new tenant has the correct lease dates.</li>
+        </ol>
+
+        <div class="callout warning">
+          <strong>Use the lease replacement prompt carefully:</strong> If you say the current tenant is moving out, the system can mark the existing lease as ending. If you are only correcting a phone number or rent amount, edit the existing lease instead.
+        </div>
+      </section>
+
+      <section id="apm-property-detail" data-harry-section="apm-property-detail-deep-dive">
+        <h2>12. APM Property Detail Deep Dive</h2>
+        <div class="tldr"><strong>TL;DR</strong>APM Property Detail organizes every operational view for one property into sections: Property, Units, lease setup/renewal/addendum actions, Rent Status, Systems, Inspections, Reminders, Tenant Portal, Documents, Maintenance History, Communications, Insurance &amp; Compliance, Expense Snapshot, Open Work Orders, Notes.</div>
+        <p>APM Property Detail is the mobile command center for one property. Each section below reflects an actual collapsible card on the screen. Tap a section header to expand or collapse.</p>
+
+        <h3>Property</h3>
+        <p>Address, city/state, LLC, property type, bedrooms, bathrooms, square footage, and active occupancy summary. Tap to edit basic property fields.</p>
+
+        <h3>Units</h3>
+        <p>List of units inside the property with occupancy state. Tap a unit to open its lease/tenant detail. Multi-unit properties show one row per unit; single-family properties show one unit.</p>
+
+        <h3>Lease Changes</h3>
+        <p>Use unit row actions on Property Detail for lease record changes. <strong>Add / Edit Lease</strong> creates or updates the lease record. <strong>Renewal</strong> starts a renewal packet for the active lease with renewal rent, renewal start date, optional end date, and changed terms. <strong>Addendum</strong> starts an addendum packet with addendum type, effective date, and terms. Renewals and addenda use the same built-in signing/approval workflow as Dashboard, use tenant contact information from the active lease, and appear in home signature follow-ups until completed.</p>
+
+        <h3>Rent Status</h3>
+        <p>Lease-level rent status, expected rent, paid, outstanding, and lease balance for the active lease(s). <span class="tag outofscope">Out of beta scope</span> Online tenant rent collection is not available in beta. Rent Status fields may show operational placeholders only.</p>
+
+        <h3>Systems</h3>
+        <p>System file for the unit: HVAC, water heater, roof, appliances, plumbing, electrical, and notes. Use this to record install dates, brand/model, last service date, and maintenance notes so future work orders and inspections have context.</p>
+        <ol class="steps">
+          <li>Tap <strong>Systems</strong> to expand the section.</li>
+          <li>Add or edit each system entry.</li>
+          <li>Optionally attach a photo or document for the system (manual, receipt, warranty).</li>
+          <li>Save.</li>
+        </ol>
+
+        <h3>Inspections</h3>
+        <p>Inspection schedule for the property. Define inspection types (annual, mid-lease, move-in, move-out, smoke detector, gutters, HVAC, etc.) and recurrence. Past inspections show date completed and notes.</p>
+        <ol class="steps">
+          <li>Tap <strong>Inspections</strong>.</li>
+          <li>Tap <strong>Add inspection</strong> or open the schedule.</li>
+          <li>Choose inspection type and recurrence.</li>
+          <li>Save the schedule. Reminders are created automatically based on cadence.</li>
+        </ol>
+
+        <h3>Reminders</h3>
+        <p>Property-level reminders for tasks unrelated to a specific work order (e.g. "renew rental license," "pay property tax," "schedule landscaper"). Reminders can have due dates and notes. Completed reminders archive.</p>
+
+        <h3>Move-Out Inspection</h3>
+        <p>Open <strong>Property Detail &gt; Move-Out Inspection</strong> when a tenant is moving out. Record condition by room, deposit deductions, photos, and notes for the move-out record. This is a standalone screen at <code>/property/[id]/move-out-inspection</code>.</p>
+
+        <h3>Tenant Portal</h3>
+        <p>Tenant portal controls for the active lease. View, share, revoke, restore, or extend the portal link. Tap <strong>Share link</strong> to send the link via SMS, email, or the system share sheet. The portal link is lease-specific.</p>
+
+        <h3>Documents</h3>
+        <p>Documents attached to this property: lease, addendums, insurance policy, inspection reports, photos, statements, vendor warranties, and any uploaded files. Tap a document to preview or download.</p>
+
+        <h3>Maintenance History</h3>
+        <p>Past completed/closed/archived work orders for this property. Tap a row to open the historical work order detail. Useful when diagnosing repeat issues or quoting a similar repair.</p>
+
+        <h3>Communications</h3>
+        <p>Recent SMS threads, calls, and voicemail tied to tenants at this property. Tap to open the thread or call detail. Use this to see "what did we last talk about?" for any tenant at the property.</p>
+
+        <h3>Insurance &amp; Compliance</h3>
+        <p>Insurance policy details, carrier, premium, effective date, renewal/expiration date, and uploaded insurance document. Add or update policy info here; the Insurance Summary report reads from these fields.</p>
+        <ol class="steps">
+          <li>Tap <strong>Insurance &amp; Compliance</strong>.</li>
+          <li>Enter carrier, policy number, premium, dates, and notes.</li>
+          <li>Attach the insurance PDF if available.</li>
+          <li>Save. The Insurance Summary report updates on next refresh.</li>
+        </ol>
+
+        <h3>Expense Snapshot</h3>
+        <p>Quick view of operational expenses for the property pulled from work order actual costs and routed invoices. Tap the snapshot to open the full Property Expense report scoped to this property.</p>
+
+        <h3>Open Work Orders</h3>
+        <p>Active work orders for the property: draft, open, in progress, scheduled, pending review. Tap one to open the work order detail and update status, contractor, cost, or attach an invoice.</p>
+
+        <h3>Notes</h3>
+        <p>Free-form internal notes for the property. Use for "tenant is hard of hearing," "back gate code 4321," "owner wants final approval on repairs over $500," and similar context that should stay with the property record.</p>
+
+        <div class="callout note">
+          <strong>Tip:</strong> If you tell Harry "open property notes" or "add an inspection," Harry can navigate APM directly to the right Property Detail section.
+        </div>
+      </section>
+
+      <section id="lease-documents" data-harry-section="lease-generator-and-approvals">
+        <h2>13. Lease Generator And Approvals</h2>
+        <div class="tldr"><strong>TL;DR</strong>Open Dashboard &gt; Leases &gt; Lease Generator for new lease documents. For existing active leases, use Property Detail in Dashboard or APM to start a lease renewal or addendum. Native signing/approval can be sent by email or phone, and pending signatures appear in home follow-ups.</div>
+        <p>The lease tools help create lease documents, lease renewals, addendums, and approval/signing requests. Always confirm the legal and state-specific terms before sending a lease for approval.</p>
+        <div class="callout success">
+          <strong><span class="tag timesaver">Time saver</span> Native lease signing is built in.</strong> The lease generator supports a simple native signing/approval flow. Tenants can receive and sign using either an email address or a phone number, so landlords do not need to move every lease through a separate signing tool.
+        </div>
+
+        <h3>Create A Lease Document</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Leases</strong> or <strong>Dashboard &gt; Documents &gt; Lease Generator</strong>.</li>
+          <li>Click or open <strong>Lease Generator</strong>.</li>
+          <li>Step 1, <strong>Lease &amp; property</strong>: choose the property/unit, state, lease period, start date, end date, rent, deposit, and landlord name.</li>
+          <li>Step 2, <strong>Tenants &amp; contact</strong>: enter tenant first name, last name, email and/or phone. Choose the primary contact. Email or phone can be used for the native signing request.</li>
+          <li>Add pets or special fields if applicable.</li>
+          <li>Step 3, <strong>Review &amp; approve</strong>: review all lease details and generated text.</li>
+          <li>Generate the lease, save as a manual lease record, or send the native signing/approval packet based on the available actions.</li>
+        </ol>
+
+        <h3>Email A Saved Lease To A Tenant</h3>
+        <ol class="steps">
+          <li>Open the existing lease record in Dashboard &gt; Leases or the tenant portal record.</li>
+          <li>Choose <strong>Email lease</strong>.</li>
+          <li>Confirm the tenant email and the lease PDF attachment.</li>
+          <li>Send. The tenant receives the lease as an email attachment; the action is logged on the lease record.</li>
+        </ol>
+
+        <h3>Create An Addendum</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Property Detail</strong> or <strong>APM &gt; Property Detail</strong>.</li>
+          <li>Choose the active unit/lease row and select <strong>Addendum</strong>.</li>
+          <li>Choose the active lease.</li>
+          <li>Select addendum type such as pet addendum, rent increase, early termination, roommate change, or lease extension.</li>
+          <li>Enter effective date and terms.</li>
+          <li>Review the addendum text before sending or saving.</li>
+          <li>Send through the built-in approval/signing workflow using the tenant email or phone already tied to the lease.</li>
+        </ol>
+
+        <h3>Create A Lease Renewal</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Property Detail</strong> or <strong>APM &gt; Property Detail</strong>.</li>
+          <li>Choose the active unit/lease row and select <strong>Renewal</strong>.</li>
+          <li>Confirm the renewal rent, renewal start date, optional renewal end date, effective date, and changed terms.</li>
+          <li>Review the renewal document text.</li>
+          <li>Send through the built-in approval/signing workflow using the tenant email or phone already tied to the lease.</li>
+        </ol>
+        <p>Pending lease renewals and addenda should surface in the home signature follow-up cards until every required signer has approved or signed.</p>
+
+        <h3>Manage Approval Requests</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Leases</strong>.</li>
+          <li>Use the approval/signing request list to filter pending, completed, expired, revoked, or error requests.</li>
+          <li>Open a request to view recipient status and audit detail.</li>
+          <li>Use resend actions for one signer or all pending signers.</li>
+          <li>Use revoke/cancel if the request should no longer be valid.</li>
+          <li>Use email PDF or reissue if the workflow needs to be repeated.</li>
+        </ol>
+      </section>
+
+      <section id="work-orders" data-harry-section="work-orders">
+        <h2>14. Work Orders And Maintenance</h2>
+        <div class="tldr"><strong>TL;DR</strong>Create in Dashboard &gt; Maintenance or APM Work Orders / Property Detail. Track status, priority, contractor, cost. Attach photos or invoices. Send tenant updates when needed. Archive when closed.</div>
+        <p>Work orders are used for tenant maintenance requests, landlord-created repairs, vendor jobs, inspections, and cost tracking.</p>
+
+        <h3>Create A Work Order In Dashboard</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Maintenance</strong>.</li>
+          <li>Click <strong>Add Work Order</strong>.</li>
+          <li>Choose the property.</li>
+          <li>Enter title, description, category, priority, status, vendor/contractor, contractor phone, estimated cost, actual cost, work type, payment status, payment account, and notes as applicable.</li>
+          <li>Review any duplicate warning. Choose <strong>Keep Both</strong> only if it is truly a separate issue.</li>
+          <li>Save.</li>
+        </ol>
+
+        <h3>Create Or Update A Work Order In APM</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Work Orders</strong>, <strong>Home</strong>, or <strong>Properties</strong>.</li>
+          <li>Tap an existing work order or choose the new work order action.</li>
+          <li>Select property, title, description, category, priority, status, contractor, scheduled date, estimated/actual cost, reported by, and notes.</li>
+          <li>Use tabs such as Activity, Details, and Files to review or update the job.</li>
+          <li>Add internal notes for the landlord/team only.</li>
+          <li>Send tenant-visible updates when the tenant needs status information.</li>
+          <li>Attach photos or invoice files as needed.</li>
+          <li>Mark completed and enter completion date/cost when finished.</li>
+        </ol>
+
+        <h3>Attach An Invoice To A Work Order</h3>
+        <ol class="steps">
+          <li>Open the work order in Dashboard or APM.</li>
+          <li>Choose <strong>Attach Invoice</strong> or invoice scan/upload.</li>
+          <li>Upload the PDF/image or pick an existing invoice draft.</li>
+          <li>Confirm vendor, amount, date, property, work order, and payment status.</li>
+          <li>Save and confirm the invoice appears on the work order and in the invoice/document records.</li>
+        </ol>
+
+        <h3>Use Filters In Maintenance</h3>
+        <p>Dashboard &gt; Maintenance includes filters for search, property, LLC, status, payment status, work type, and date range. Use these when reconciling vendor bills, finding unpaid work, reviewing completed repairs, or preparing property expense reports.</p>
+
+        <h3>Archive A Work Order</h3>
+        <ol class="steps">
+          <li>Open the work order.</li>
+          <li>Confirm the status is completed/closed/cancelled before archiving.</li>
+          <li>Tap or click <strong>Archive</strong>. Archived work orders move out of the active queue but remain in Maintenance History.</li>
+        </ol>
+
+        <h3>Open Work Orders Older Than 7 Days</h3>
+        <p>APM Home and APM Work Orders highlight any open work order older than 7 days as "older than 7 days" so the landlord can chase the contractor or update the tenant. Use this as a quick weekly review trigger.</p>
+      </section>
+
+      <section id="messages-calls" data-harry-section="messages-calls-voicemail">
+        <h2>15. Messages, Calls, And Voicemail</h2>
+        <div class="tldr"><strong>TL;DR</strong>Use Dashboard &gt; Messages or APM Inbox for threads. Use APM Call tab to dial or pick from contacts. Voicemails appear in Inbox VM filter with playback and transcription. Use APM Compose for a new outbound message to any contact.</div>
+        <p>Messages and calls are organized by tenant, vendor, phone number, property, unread status, favorites, and voicemail state.</p>
+
+        <h3>Use Dashboard Messages</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Messages</strong>.</li>
+          <li>Use filters for newest/oldest/unread, date range, property, tenant/vendor, and favorites.</li>
+          <li>Select a conversation.</li>
+          <li>Read the thread, media, call/voicemail indicators, and activity history.</li>
+          <li>Reply when appropriate.</li>
+          <li>Star/favorite important conversations for faster access.</li>
+        </ol>
+
+        <h3>Use APM Inbox</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Inbox</strong>.</li>
+          <li>Use quick filters: All, New, Favorites, Tenants, Vendors, Groups, or VM.</li>
+          <li>Search by name, phone, property, or message body.</li>
+          <li>Open a thread to read messages and calls.</li>
+          <li>Reply to SMS messages or open related work orders/properties when needed.</li>
+        </ol>
+
+        <h3>Start A New Message From APM Compose</h3>
+        <ol class="steps">
+          <li>Open the Compose action (paper-airplane / new-message icon) from APM Inbox or Home.</li>
+          <li>Pick a contact (tenant, vendor, or general) or type a phone number.</li>
+          <li>Optionally pick a Quick Reply template (see Settings &gt; Quick Replies).</li>
+          <li>Type or paste the message and send. The new thread appears in Inbox.</li>
+        </ol>
+
+        <h3>Make An Outbound Call In APM</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Call</strong>.</li>
+          <li>Type a phone number or search contacts.</li>
+          <li>Select a matching contact if shown.</li>
+          <li>Tap call.</li>
+          <li>The active call screen shows connecting, ringing, connected, and disconnected states.</li>
+        </ol>
+
+        <h3>Handle Voicemail</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Inbox &gt; VM</strong> or look for voicemail indicators in a conversation.</li>
+          <li>Open the voicemail/call item.</li>
+          <li>Listen to the recording and read transcription if available.</li>
+          <li>Return the call, send an SMS, create a work order, or add an internal note based on the voicemail content.</li>
+        </ol>
+      </section>
+
+      <section id="contacts-vendors" data-harry-section="contacts-and-vendors">
+        <h2>16. Contacts And Vendors</h2>
+        <div class="tldr"><strong>TL;DR</strong>Contacts include tenants, vendors, prior tenants, general contacts, and prospects. Vendors are reusable in work orders. Mark preferred vendors and use "Do not use" with a reason for problem contractors.</div>
+        <p>Contacts include tenants, vendors/contractors, prior tenants, general contacts, property managers, and prospects. Vendors are also used in work orders and invoices.</p>
+
+        <h3>Open Contacts</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Contacts</strong> or <strong>APM &gt; Contacts</strong>.</li>
+          <li>Search by name, phone, email, property, trade, or category.</li>
+          <li>Filter by tenant, vendor, general contact, favorite, preferred vendor, do-not-use vendor, LLC, property, or status as available.</li>
+        </ol>
+
+        <h3>Add Or Edit A Vendor</h3>
+        <ol class="steps">
+          <li>Open Contacts and choose the vendor/contact edit action.</li>
+          <li>Enter vendor name, contact name, company name, trade, specialty, phone, email, address, license number, insurance expiry, tax ID, and W-9 status as applicable.</li>
+          <li>Mark preferred vendors when you want them easier to find.</li>
+          <li>Mark <strong>Do not use</strong> and enter a reason when a contractor should be avoided.</li>
+          <li>Save.</li>
+        </ol>
+
+        <h3>Use Vendors In Work Orders</h3>
+        <ol class="steps">
+          <li>Open a work order.</li>
+          <li>Choose the contractor/vendor field.</li>
+          <li>Select an existing vendor or enter a new contractor name/phone.</li>
+          <li>Save the work order.</li>
+          <li>After the job, update rating, reliability, comments, or do-not-use status if needed.</li>
+        </ol>
+      </section>
+
+      <section id="documents" data-harry-section="documents-and-photos">
+        <h2>17. Documents And Photos</h2>
+        <div class="tldr"><strong>TL;DR</strong>Upload from Dashboard &gt; Documents or from any property detail page. Use categories (Leases, Invoices, Insurance, Photos, Inspections, etc.). Filter by LLC/property/category to find anything.</div>
+        <p>Documents store portfolio files and property records in one searchable place.</p>
+
+        <h3>Upload A Document</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Documents</strong>.</li>
+          <li>Drop a file into the upload area or click to browse.</li>
+          <li>Select a category such as Leases &amp; Addendums, Work Orders, Insurance Policies, Correspondence, Invoices, Photos, Inspections, or Other.</li>
+          <li>Select the property if the document belongs to one property.</li>
+          <li>Add comments/notes.</li>
+          <li>Click <strong>Upload</strong>.</li>
+        </ol>
+
+        <h3>Find Documents</h3>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Documents</strong>.</li>
+          <li>Use filters for LLC, property, category, subcategory, date range, and search text.</li>
+          <li>Open a document in the viewer when needed.</li>
+          <li>Export a filtered PDF list or download a ZIP when available.</li>
+        </ol>
+
+        <h3>Property-Level Documents And Photos</h3>
+        <ol class="steps">
+          <li>Open a property detail page.</li>
+          <li>Use the <strong>Documents</strong>, <strong>Photos</strong>, or <strong>Inspections</strong> tabs.</li>
+          <li>Upload or review files tied to that specific property.</li>
+        </ol>
+      </section>
+
+      <section id="tenant-portal" data-harry-section="tenant-portal">
+        <h2>18. Tenant Portal</h2>
+        <div class="tldr"><strong>TL;DR</strong>Each tenant has a lease-specific portal link. The portal is a small web app with Home, Messages, Work Orders, Lease, Documents, and Move-Out. No tenant login is needed; the link is the credential. Share, revoke, or extend it from APM or Dashboard.</div>
+        <p>The tenant portal gives each tenant a lease-specific access link. It is designed for tenant self-service without giving dashboard access. The portal opens in a normal browser; tenants do not download an app.</p>
+
+        <h3>Portal Pages (URL Pattern)</h3>
+        <table>
+          <tr><th>Page</th><th>URL Pattern</th><th>What The Tenant Does</th></tr>
+          <tr><td>Home</td><td><code>/:token</code></td><td>Lease summary, links to all other portal pages.</td></tr>
+          <tr><td>Messages</td><td><code>/m/:token</code></td><td>Two-way SMS-style chat with the landlord. Messages flow into the landlord's APM Inbox.</td></tr>
+          <tr><td>Work Orders</td><td><code>/work-orders/:token</code></td><td>Report a new maintenance request with description and photos. View status of past and current work orders.</td></tr>
+          <tr><td>Lease</td><td><code>/lease/:token</code></td><td>View the lease, addendums, lease details, and request an addendum (e.g. add roommate, pet, rent change).</td></tr>
+          <tr><td>Documents</td><td><code>/documents/:token</code></td><td>Tenant-visible documents (lease PDF, addendums, move-in inspection, etc.).</td></tr>
+          <tr><td>Move-Out</td><td><code>/move-out/:token</code></td><td>Submit a move-out request with planned date, forwarding address, and notes. Landlord receives a notification.</td></tr>
+        </table>
+
+        <h3>What Tenants Can Do</h3>
+        <ul>
+          <li>View portal home for their lease/property.</li>
+          <li>Report a maintenance request and upload photos.</li>
+          <li>Review their own work orders and status updates.</li>
+          <li>Message the landlord.</li>
+          <li>View lease documents and addendums.</li>
+          <li>Request lease changes such as adding/removing a tenant or another addendum request.</li>
+          <li>Request move-out and provide forwarding address/notes.</li>
+        </ul>
+
+        <div class="callout warning">
+          <strong>Beta scope:</strong> <span class="tag outofscope">Out of beta scope</span> Online rent payment and rent ledger visibility are not available in beta. Tenants will not see Pay Rent or rent balance in the portal until those features are enabled.
+        </div>
+
+        <h3>Share A Tenant Portal Link From APM</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Properties</strong>.</li>
+          <li>Open the tenant's property.</li>
+          <li>Open the <strong>Tenant Portal</strong> section.</li>
+          <li>Tap <strong>Share link</strong>, <strong>Create</strong>, <strong>Restore</strong>, <strong>Revoke</strong>, or <strong>Extend</strong> as needed.</li>
+          <li>Choose the share channel (SMS, email, or system share sheet).</li>
+          <li>Use preview/view-as-tenant only for landlord review.</li>
+        </ol>
+
+        <h3>Share A Tenant Portal Link From Dashboard</h3>
+        <ol class="steps">
+          <li>Open the property detail page in the dashboard.</li>
+          <li>Find the tenant on the lease.</li>
+          <li>Use the tenant portal control to create, share, or revoke the link.</li>
+          <li>Send to the tenant via SMS from the dashboard or copy the link to send through email.</li>
+        </ol>
+
+        <h3>Use Tenant Portal Links With Calls</h3>
+        <p>Known tenant calls can use Press 1 to receive a portal link by SMS. This lets tenants report maintenance in the portal rather than leaving incomplete voicemail details.</p>
+
+        <h3>Move-Out Request From The Tenant</h3>
+        <ol class="steps">
+          <li>Tenant opens <strong>/move-out/:token</strong> from the portal.</li>
+          <li>Tenant enters planned move-out date, forwarding address, optional reason, and notes.</li>
+          <li>Tenant submits. Landlord sees the request in the dashboard and APM as a notification on the property/lease.</li>
+          <li>Landlord reviews and confirms the move-out date on the lease record. Use the move-out inspection page in Property Detail to record condition by room.</li>
+          <li>Optionally, email the tenant the move-out guide using the <strong>Email move-out guide</strong> action on the lease.</li>
+        </ol>
+
+        <h3>Historical / Read-Only Access</h3>
+        <p>After a lease ends, portal access may become historical/read-only. Historical access lets tenants see appropriate lease-era records without opening new requests unless access is restored or extended.</p>
+      </section>
+
+      <section id="rent-financial" data-harry-section="rent-and-invoice-scope">
+        <h2>19. Rent And Invoice Scope (Beta)</h2>
+        <div class="tldr"><strong>TL;DR</strong>Beta users get operational invoice intake, property-level expense tracking, and Schedule E report organization for tax-planning review. Online rent collection, payment provider setup, bank import, reconciliation, P&amp;L, balance sheet, general ledger, and 1099 reporting are <span class="tag outofscope">Out of beta scope</span>.</div>
+        <p>APM and PM Platform separate basic operational management from rent payment and accounting features. This distinction matters because beta accounts do not have online rent collection or full financial reporting enabled.</p>
+
+        <h3>In Beta Scope</h3>
+        <table>
+          <tr><th>Feature</th><th>What You Can Do</th></tr>
+          <tr><td>Property expense tracking</td><td>Capture repair/maintenance costs through work order actual cost, scanned/emailed invoice intake, or uploaded receipts. See expenses by property in APM &gt; Reports &gt; Property Expense and Dashboard &gt; Reports.</td></tr>
+          <tr><td>Schedule E report</td><td>Review supported expense rows grouped by LLC, property, and Schedule E line for tax-planning organization. Harry can locate/explain the report source rows but cannot provide tax treatment or filing advice.</td></tr>
+          <tr><td>Invoice intake</td><td>Forward invoices to the intake email, scan from APM, or upload from dashboard. Review extracted vendor, amount, date, category, and property before routing to a work order, operational expense, or document-only record.</td></tr>
+          <tr><td>Work order cost tracking</td><td>Record estimated and actual cost per work order. Used in Property Expense and Work Order Aging reports.</td></tr>
+          <tr><td>Tenant charge drafts</td><td>Draft tenant charges from property detail (utility, damage, lease fee, pet fee, other). Draft only; tenants will not see balances or pay online during beta.</td></tr>
+          <tr><td>Operational rent status (optional)</td><td>If your account has rent operational capability turned on, APM Rent Status and Dashboard Rent will show lease counts, expected rent, and status placeholders. Dollar amounts may be hidden depending on scope.</td></tr>
+        </table>
+
+        <h3>Out Of Beta Scope</h3>
+        <div class="callout warning">
+          <strong>Not available to beta accounts. Not covered by this manual.</strong>
+          <ul>
+            <li><span class="tag outofscope">Out of beta scope</span> Online tenant rent collection (ACH, card, autopay, Pay Online).</li>
+            <li><span class="tag outofscope">Out of beta scope</span> Payment provider setup (Stripe or other).</li>
+            <li><span class="tag outofscope">Out of beta scope</span> Bank import, bank matching, and reconciliation.</li>
+            <li><span class="tag outofscope">Out of beta scope</span> Transaction ledger, cash-final status, LLC/account mapping.</li>
+            <li><span class="tag outofscope">Out of beta scope</span> Profit &amp; loss, balance sheet, general ledger, depreciation schedules.</li>
+            <li><span class="tag outofscope">Out of beta scope</span> 1099 reporting and tax filing decisions.</li>
+            <li><span class="tag outofscope">Out of beta scope</span> Owner statement and owner ledger reporting.</li>
+          </ul>
+          If your account holder needs any of these features, contact support. They will be released to beta accounts as scope expands.
+        </div>
+
+        <h3>Add Tenant Charges From Property Detail (Draft)</h3>
+        <ol class="steps">
+          <li>Open a property detail page.</li>
+          <li>Find <strong>Rent Status &amp; Tenant Charges</strong>.</li>
+          <li>Select the month and tenant/lease.</li>
+          <li>Choose a charge category: utility, damage, lease fee, pet fee, or other.</li>
+          <li>Enter amount, due date, and description.</li>
+          <li>Click <strong>Add Charge</strong>. The charge is a draft record only during beta; tenants will not see or pay it online.</li>
+        </ol>
+      </section>
+
+      <section id="reports" data-harry-section="reports">
+        <h2>20. Reports</h2>
+        <div class="tldr"><strong>TL;DR</strong>APM Reports tab is the fast mobile report surface with a single Export button for PDF or Excel. Dashboard Reports has larger desktop tables. Both surface Property Expense, Rent Roll, Insurance Summary, RE Summary, Vacancy + Unit Status, Work Order Aging, Overdue Rent when enabled, Schedule E, and Rental Evaluator. Invoice Approvals is an approval workflow, not an export report.</div>
+        <p>Reports are available in the dashboard and in APM. APM reports are designed for quick mobile review and export while the landlord is away from the desk. Dashboard reports are better for broader portfolio review and larger tables.</p>
+
+        <div class="callout success">
+          <strong>Core feature: property expense tracking.</strong> APM tracks property-level expenses from work orders and invoice intake so landlords can see what each unit or property is costing over time. The Property Expense and Schedule E reports can use those operating records without requiring bank-recognition workflows.
+        </div>
+
+        <h3>APM Reports</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Reports</strong>.</li>
+          <li>Select a report.</li>
+          <li>Use <strong>Scope</strong> when shown. Scope is one control: choose all properties, one LLC/company, or one property. The list appears only after tapping the control.</li>
+          <li>Use <strong>Period</strong> when shown. Period covers month/quarter/year/custom date presets, or a year-only selector for reports such as Schedule E.</li>
+          <li>Tap <strong>Export</strong> when shown, then choose <strong>PDF</strong> or <strong>Excel</strong> from the menu.</li>
+          <li>Regular report exports include Assistant Property Manager version, generated date, signed-in user, LLC subtotal rows directly below each LLC group, and report totals at the bottom. Excel exports are real <code>.xlsx</code> workbooks with formulas where totals are calculated.</li>
+        </ol>
+        <table>
+          <tr><th>APM Report</th><th>Use It For</th></tr>
+          <tr><td>Invoice Approvals</td><td>Approval queue for invoices needing review or routing from dashboard uploads, APM scans, and authorized email intake. No filters or export; use row/select-all approval actions.</td></tr>
+          <tr><td>Property Expense</td><td>Operational repair, maintenance, invoice intake, vendor, utility, tax, and insurance expense review by property. Filter by timeframe, LLC, and property.</td></tr>
+          <tr><td>Schedule E</td><td>Tax-planning expense organization by LLC, property, and Schedule E line. Scope and year/period filters are available. Harry may explain source rows but must not give tax treatment advice.</td></tr>
+          <tr><td>Rent Roll</td><td>Current lease, tenant, rent, deposit, past due, and occupancy review. Filter by LLC or property.</td></tr>
+          <tr><td>Insurance Summary</td><td>Insurance policy, premium, document, and renewal review. Filter by LLC or property.</td></tr>
+          <tr><td>RE Summary</td><td>Real estate portfolio summary including property value, rent, loan, tax, insurance, estimated equity, and ownership grouping. Filter by LLC or property.</td></tr>
+          <tr><td>Vacancy + Unit Status</td><td>Vacant/occupied unit review. Filter by LLC or property.</td></tr>
+          <tr><td>Work Order Aging</td><td>Open, aging, overdue, completed maintenance, vendor status, and cost tracking. Filter by timeframe, LLC, and property.</td></tr>
+          <tr><td>Rental Evaluator</td><td>Native deal screening calculator for purchase assumptions, projection, and cash flow.</td></tr>
+          <tr><td>Overdue Rent <span class="tag outofscope">Out of beta scope</span></td><td>Only visible when the account has rent operational capability enabled.</td></tr>
+        </table>
+
+        <h3>Rental Evaluator</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Reports &gt; Rental Evaluator</strong>.</li>
+          <li>Enter street address, city, and state. For long addresses, keep street address separate from city/state.</li>
+          <li>Enter purchase price, assessed value, down payment, loan amount, rate, term, LOC amount/rate/term, income, costs, and growth assumptions.</li>
+          <li>Use the tabs: Inputs, Snapshot, Projection, and Cash Flow.</li>
+          <li>Review the five-year cash-flow table and bar chart on screen.</li>
+          <li>Tap <strong>Export</strong> and choose PDF or Excel.</li>
+        </ol>
+        <p>The Rental Evaluator is also available from Dashboard &gt; Reports if you prefer a wider screen for assumptions.</p>
+
+        <h3>Dashboard Reports</h3>
+        <p>Dashboard reports include the same adjusted operational reports as APM in a wider layout. Common reports include rent roll, tenant list, insurance summary, vacancy, work order aging, property expenses, Schedule E, and rental evaluator. Already-approved financial reports such as P&amp;L, balance sheet, debt schedule, mortgage analysis, and Schedule E financial layouts should not be redesigned unless explicitly requested.</p>
+        <ol class="steps">
+          <li>Open <strong>Dashboard &gt; Reports</strong>.</li>
+          <li>Select the report from the report dropdown.</li>
+          <li>Use the filters above the report: LLC, year, period preset, custom date range, property, or month depending on the report.</li>
+          <li>Use <strong>CSV</strong> or <strong>Excel</strong> for editable data exports.</li>
+          <li>Use <strong>PDF</strong> or <strong>Print</strong> for a presentation or printed report.</li>
+        </ol>
+
+        <div class="callout note">
+          <strong>Export guidance:</strong> Use Excel/CSV when you need editable data. Use PDF when you need a presentation, owner packet, email attachment, or print-ready report.
+        </div>
+      </section>
+
+      <section id="settings" data-harry-section="settings">
+        <h2>21. Settings</h2>
+        <div class="tldr"><strong>TL;DR</strong>Dashboard Settings: Profile &amp; LLCs, Lease Defaults, Twilio Number, Imports &amp; Setup, Market Data, Help &amp; Tips. APM Settings: App Mode, Appearance, Dashboard handoff, APM Home layout, Voice, Messaging, Quick Replies, Feedback Automation, Contextual Help, Health, Error Log, About / OTA.</div>
+        <p>Settings control account details, company records, lease defaults, import/setup reruns, market data, help tips, app preferences, and voice/messaging behavior.</p>
+
+        <h3>Dashboard Settings</h3>
+        <table>
+          <tr><th>Section</th><th>What To Configure</th></tr>
+          <tr><td>Profile &amp; LLCs</td><td>Account holder name, email, verified mobile phone, LLC names, EINs, legal addresses.</td></tr>
+          <tr><td>Lease Defaults</td><td>Enabled states, default state, global or per-LLC landlord/manager signer, signer email/phone.</td></tr>
+          <tr><td>Twilio Number</td><td>Dedicated APM number, incoming call mode, tenant menu behavior, approved tenant menu script, quiet times, forwarding phone, and unknown caller mode.</td></tr>
+          <tr><td>Imports &amp; Setup</td><td>Add additional properties (same/new LLC), re-run setup wizard options (Add / Reimport / Fresh).</td></tr>
+          <tr><td>Market Data</td><td>RentCast refresh and scheduled monthly refresh when available.</td></tr>
+          <tr><td>Help &amp; Tips</td><td>Contextual help toggles, reset tips, guided hints, replay Harry intro.</td></tr>
+        </table>
+
+        <h3>APM Settings</h3>
+        <table>
+          <tr><th>Section</th><th>What To Configure</th></tr>
+          <tr><td>App Mode</td><td>Switch between Production and Sandbox. Confirm before doing real tenant work.</td></tr>
+          <tr><td>Appearance</td><td>Light, dark, or system theme.</td></tr>
+          <tr><td>Dashboard</td><td>Open the web dashboard from APM. Useful for actions that require the desktop (bulk imports, lease generator, document review).</td></tr>
+          <tr><td>APM Home</td><td>Choose home layout: Communications, Today, or Properties.</td></tr>
+          <tr><td>Voice</td><td>Incoming call mode (Twilio app / Forward / App then forward), Unknown Caller Mode (Screen / Voicemail / Reject / Allow). Shares the same Twilio config as Dashboard &gt; Settings &gt; Twilio Number.</td></tr>
+          <tr><td>Messaging</td><td>Debug messages, quick replies, messaging preferences.</td></tr>
+          <tr><td>Quick Replies</td><td>Saved short response templates. Create, edit, or delete templates from APM &gt; Settings &gt; Quick Replies, then pick them from the Compose bar when sending messages.</td></tr>
+          <tr><td>Feedback Automation</td><td>Automatically turn feedback button taps into a GitHub issue tied to the screen, build, and account mode. Helpful for beta bug reporting.</td></tr>
+          <tr><td>Contextual Help</td><td>Toggle the in-screen tips and coach marks. Reset tips to see them again on next visit.</td></tr>
+          <tr><td>Health</td><td>API/backend reachability, auth status, app mode, build, and last sync.</td></tr>
+          <tr><td>Error Log</td><td>Recent client-side errors with screen, action, timestamp, and error detail. Include the most recent entries when reporting a bug.</td></tr>
+          <tr><td>About</td><td>App version, build number, runtime info, OTA update check.</td></tr>
+        </table>
+
+        <h3>Create A Quick Reply</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Settings &gt; Quick Replies</strong>.</li>
+          <li>Tap <strong>Add quick reply</strong>.</li>
+          <li>Enter a short title (e.g. "On my way") and the body text.</li>
+          <li>Save. The reply is now available from the Compose bar.</li>
+        </ol>
+
+        <h3>Check Health</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Settings &gt; Support &gt; Health</strong>.</li>
+          <li>Look for "ok" on backend, auth, and sync.</li>
+          <li>If anything is failing, copy the values into a feedback report.</li>
+        </ol>
+
+        <h3>Read The Error Log</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Settings &gt; Support &gt; Error Log</strong>.</li>
+          <li>Scroll the recent entries. Each entry shows screen, action, message, and timestamp.</li>
+          <li>Copy or screenshot the relevant entry to attach to a feedback report.</li>
+        </ol>
+
+        <h3>Check For OTA Update</h3>
+        <ol class="steps">
+          <li>Open <strong>APM &gt; Settings &gt; Support &gt; About</strong> or the OTA update action.</li>
+          <li>Tap <strong>Check for update</strong>.</li>
+          <li>If an OTA update is available, follow the prompt to apply and restart APM.</li>
+        </ol>
+      </section>
+
+      <section id="sandbox" data-harry-section="sandbox-and-live-mode">
+        <h2>22. Sandbox And Live Mode</h2>
+        <div class="tldr"><strong>TL;DR</strong>Sandbox is a safe practice environment with sample data. Production is for real records, tenants, calls, leases, and invoices. New users default to Sandbox; switch when ready.</div>
+        <p><span class="tag default">First-time default</span> Sandbox mode is for practice and demos. First-time users start in Sandbox with sample data so they can try the app before entering or importing real information. Production/live mode is for real portfolio data.</p>
+
+        <h3>Use Sandbox Mode</h3>
+        <ol class="steps">
+          <li>Open the dashboard or APM app mode controls.</li>
+          <li>Switch to Sandbox. New users normally begin here automatically.</li>
+          <li>Practice creating work orders, reviewing reports, sending test messages, or exploring the UI.</li>
+          <li>Switch back to Production before working with real tenants/properties.</li>
+        </ol>
+
+        <h3>Switch To Production</h3>
+        <ol class="steps">
+          <li>Use the dashboard mode toggle or APM Settings &gt; Account &gt; App Mode.</li>
+          <li>Select Production when you are ready to import real leases, activate tenant communication, scan real invoices, or make real lease/work-order changes.</li>
+          <li>You can switch back to Sandbox later to try a workflow without affecting production records.</li>
+        </ol>
+
+        <h3>Check You Are In The Right Mode</h3>
+        <ul>
+          <li>The dashboard may show a sandbox/live mode banner or toggle.</li>
+          <li>APM Settings &gt; Account shows App Mode.</li>
+          <li>Do not send tenant welcome texts or make real lease changes unless App Mode is Production and you intend to affect real records.</li>
+        </ul>
+      </section>
+
+      <section id="support" data-harry-section="support-feedback-bugs">
+        <h2>23. Report Bugs Or Suggestions</h2>
+        <div class="tldr"><strong>TL;DR</strong>Use the Feedback button in APM (in most screen headers) or contact support from the dashboard. Include screen, mode, steps, expected vs actual, and the most recent error log entry if relevant.</div>
+        <p>Use feedback whenever something does not work, does not fit on screen, fails to sync, or is confusing.</p>
+
+        <h3>Report From APM</h3>
+        <ol class="steps">
+          <li>Tap the feedback button where available, often in the screen header.</li>
+          <li>Describe what you were trying to do.</li>
+          <li>Include the property, tenant, work order, or report name if relevant.</li>
+          <li>Include whether you were in Production or Sandbox.</li>
+          <li>If the app shows an error, open <strong>Settings &gt; Support &gt; Error Log</strong> and include the recent error details.</li>
+          <li>If <strong>Feedback Automation</strong> is enabled (Settings &gt; Support), your feedback can be routed automatically into a bug-tracking issue with screen, build, and mode attached.</li>
+        </ol>
+
+        <h3>Report From Dashboard</h3>
+        <ol class="steps">
+          <li>Use the available support/feedback channel or contact support.</li>
+          <li>Give the page name, action attempted, expected result, actual result, browser, and account mode.</li>
+          <li>For import or invoice scan issues, include the source type and whether the file was PDF, image, or CSV.</li>
+          <li>For tenant issues, include the property and tenant but avoid sending sensitive information unless requested securely.</li>
+        </ol>
+
+        <h3>Good Bug Report Template</h3>
+        <ul>
+          <li>Where: APM or Dashboard, screen name, Production/Sandbox.</li>
+          <li>Steps: what you tapped or clicked.</li>
+          <li>Expected: what should have happened.</li>
+          <li>Actual: what happened instead.</li>
+          <li>Scope: one property/tenant or all records.</li>
+          <li>Urgency: blocking tenant communication, blocking lease, data display only, or suggestion.</li>
+        </ul>
+      </section>
+
+      <section id="daily-ops" data-harry-section="recommended-operating-rhythm">
+        <h2>24. Recommended Operating Rhythm</h2>
+        <div class="tldr"><strong>TL;DR</strong>Daily: clear APM Inbox, review overdue work orders, scan today's invoices. Weekly: review maintenance filters, expiring leases, vendor ratings. Monthly: run operational reports, refresh market data, export for owners or bookkeeping.</div>
+
+        <h3>Daily</h3>
+        <ul>
+          <li>Open APM Home and review overdue/active work orders.</li>
+          <li>Open APM Inbox and clear new tenant/vendor messages.</li>
+          <li>Review voicemails and return urgent calls.</li>
+          <li>Scan any invoices or receipts received that day.</li>
+          <li>Check tenant portal maintenance requests.</li>
+        </ul>
+
+        <h3>Weekly</h3>
+        <ul>
+          <li>Review Dashboard &gt; Maintenance filters for open, overdue, unpaid, and completed work orders.</li>
+          <li>Review property expense reports and invoice routing.</li>
+          <li>Update vendor ratings, do-not-use notes, and preferred vendor choices.</li>
+          <li>Check documents and upload missing leases, insurance, invoices, and inspection records.</li>
+          <li>Review lease expiration and vacancy status.</li>
+        </ul>
+
+        <h3>Monthly</h3>
+        <ul>
+          <li>Run rent roll, work order aging, property expense, Schedule E, vacancy + unit status, and insurance reports.</li>
+          <li>Refresh market data if available.</li>
+          <li>Export reports needed for owners or internal review.</li>
+          <li>Review tenant portal status and revoke any links for tenants no longer active.</li>
+        </ul>
+      </section>
+
+      <section id="harry" data-harry-section="harry-assistant">
+        <h2>25. Harry Assistant</h2>
+        <div class="tldr"><strong>TL;DR</strong>Harry is the in-product, screen-aware assistant. Launcher lives bottom-right on the dashboard and inside APM (Home action or Settings). Harry knows what screen you're on, suggests next actions, drafts messages, opens the right page, and explains feature gates.</div>
+        <p>Harry is the built-in assistant for PM Platform and APM. Harry is scoped to the product: setup, properties, leases, lease renewals/addenda, tenants, work orders, messages, contacts, documents, invoice intake, property expenses, Schedule E report organization, operational reports, communication setup, and tenant portal rollout. Harry is not a general-purpose chatbot and will not give tax, legal, or investment advice.</p>
+
+        <h3>Where Harry Lives</h3>
+        <ul>
+          <li><strong>Dashboard:</strong> floating launcher at the bottom-right of every page.</li>
+          <li><strong>APM:</strong> Harry icon in the home header and inside Settings. Available across Home, Inbox, Contacts, Call, Properties, Property Detail, Work Orders, Work Order Detail, Rent Status, Reports, Rental Evaluator, Invoices, and Settings.</li>
+        </ul>
+
+        <h3>How To Open Harry</h3>
+        <ol class="steps">
+          <li>Tap or click the Harry launcher.</li>
+          <li>Use a suggested starter prompt for the current screen, or type your question.</li>
+          <li>Harry replies with the answer, a draft, or a navigation action you can confirm.</li>
+        </ol>
+
+        <h3>Starter Prompts Harry Suggests Per Screen</h3>
+        <table>
+          <tr><th>Screen</th><th>Suggested Prompts</th></tr>
+          <tr><td>APM Home</td><td>"Open work orders." "Open rent status." "Open properties."</td></tr>
+          <tr><td>APM Inbox</td><td>"Open messages." "Help me respond to this tenant." "Show me how to make a work order from a message."</td></tr>
+          <tr><td>APM Contacts</td><td>"Open contacts." "Help me find a tenant or vendor." "How do contacts connect to calls and messages?"</td></tr>
+          <tr><td>APM Call</td><td>"Open dialpad." "Review missed calls." "Help me draft a follow-up after a call."</td></tr>
+          <tr><td>APM Properties</td><td>"Open properties." "How to set up a tenant?" "How to set up a new lease?"</td></tr>
+          <tr><td>APM Property Detail</td><td>"How to set up a new lease?" "How do I send a lease renewal?" "How do I create a lease addendum?"</td></tr>
+          <tr><td>APM Work Orders</td><td>"All work orders." "Old work orders." "Create work order."</td></tr>
+          <tr><td>APM Rent Status</td><td>"Open rent status." "Who still owes rent this month?" "Open rent roll."</td></tr>
+          <tr><td>APM Reports</td><td>"Repair spend." "Open Schedule E." "Open Rental Evaluator."</td></tr>
+          <tr><td>APM Rental Evaluator</td><td>"Explain this deal." "Apply purchase 120k, rent 1600, repairs 15k." "Export this evaluation."</td></tr>
+          <tr><td>APM Invoices</td><td>"Open invoices." "What invoices need approval?" "How does email invoice intake work?"</td></tr>
+          <tr><td>APM Settings</td><td>"Open settings." "Explain the tenant number and voice setup." "What should I configure before production?"</td></tr>
+        </table>
+
+        <h3>What Harry Can Do</h3>
+        <ul>
+          <li>Explain what a screen, section, or report shows.</li>
+          <li>Navigate APM or the dashboard directly to a screen, property, work order, lease, or report.</li>
+          <li>Draft tenant messages, missed-call replies, after-hours acknowledgements, vendor messages, or status updates for approval.</li>
+          <li>Suggest the right next step in onboarding, communication setup, invoice intake, or portal rollout.</li>
+          <li>Apply Rental Evaluator inputs from a sentence like "purchase 120k, rent 1600, repairs 15k."</li>
+          <li>Open the guided app tour when a user is new or wants a refresher.</li>
+        </ul>
+
+        <h3>How Harry Routes Dashboard-Only Tasks From APM</h3>
+        <p>Some workflows are dashboard-only (bulk lease import, lease generator, lease defaults, signer overrides, deep document review, market data refresh). If you ask Harry about one of these from APM, Harry will answer with mobile context and offer a one-tap handoff to open the dashboard at the right page.</p>
+
+        <h3>What Harry Will Not Do</h3>
+        <ul>
+          <li>Give tax, legal, investment, or insurance advice. Harry will recommend a CPA, attorney, or qualified professional instead.</li>
+          <li>Send a tenant-facing message, place a call, share a portal link, change Twilio settings, or save a lease without explicit user confirmation.</li>
+          <li>Promise online rent collection, bank reconciliation, P&amp;L, 1099, or other <span class="tag outofscope">Out of beta scope</span> features. Schedule E can be opened/explained as a report, but Harry cannot give tax treatment or filing advice.</li>
+          <li>Answer general-knowledge questions outside property management.</li>
+        </ul>
+
+        <h3>Correcting Harry</h3>
+        <p>If Harry gives a wrong answer, missed a gate, or suggested an unsafe action, mark the response as needing correction and add the better answer. Corrections are saved locally and reviewed to improve the notebook Harry uses. Do not put sensitive tenant or bank data in corrections; summarize the rule instead.</p>
+
+        <h3>Replay The Guided Tour</h3>
+        <ol class="steps">
+          <li>Open Harry on APM Home.</li>
+          <li>Choose "Open guided tour" or open <strong>Settings &gt; Help / Tips</strong> and tap <strong>Reset tips</strong>.</li>
+          <li>Follow the highlighted targets through Home, Inbox, Properties, Work Orders, and Settings.</li>
+        </ol>
+      </section>
+
+      <section id="qa" class="qa" data-harry-section="qa">
+        <h2>26. Q&amp;A</h2>
+        <p style="color:var(--faint);font-size:13px;margin-bottom:14px;">Each Q&amp;A has a <code>data-harry-link</code> attribute on its <code>&lt;h3&gt;</code> so Harry can return a clickable link with the answer. Links target the dashboard route; APM has its own native routes for the same intent and Harry handles that internally.</p>
+
+        <h3 data-harry-link="/settings">How do I set up a new company?</h3>
+        <p>Start in Dashboard onboarding &gt; Company Setup. Select operating states, enter LLC count and LLC details, choose management model, set lease defaults, then continue. After onboarding, use Dashboard &gt; Settings &gt; Profile &amp; LLCs and Lease Defaults to update EINs, legal addresses, signers, and default state.</p>
+
+        <h3 data-harry-link="/settings">How do I add a new property?</h3>
+        <p>Use Dashboard &gt; Settings &gt; Imports &amp; Setup &gt; Add Additional Properties. Choose same LLC or new LLC, then import by lease PDF, CSV/software export, or manual row entry. Review the address, tenant, rent, lease dates, and LLC before confirming.</p>
+
+        <h3 data-harry-link="/leases">How do I add a tenant to an existing property?</h3>
+        <p>Open the property in Dashboard or APM. In Dashboard, use Tenants &amp; Leases &gt; New Lease/Edit Lease. In APM, open Property Detail and use Add Tenant or Add / Edit Lease. If the unit is occupied, answer whether the current lease is ending and enter the move-out/expiration date if applicable.</p>
+
+        <h3 data-harry-link="/lease-generator">How do I set up a new lease?</h3>
+        <p>For a lease record, open the property and use New Lease or Add / Edit Lease. For a generated lease document, open Dashboard &gt; Leases or Documents &gt; Lease Generator, choose the property/unit, enter lease terms and tenant contacts, review, then generate/save or send the native signing packet. Tenants can sign with an email address or phone number. <em>If you ask this in APM, Harry will offer to open the dashboard at the Lease Generator for you.</em></p>
+
+        <h3 data-harry-link="/properties">How do I renew a lease or create an addendum?</h3>
+        <p>Open Property Detail in Dashboard or APM, choose the active unit/lease, then select Renewal or Addendum. For a renewal, confirm renewal rent, renewal start date, optional end date, and changed terms. For an addendum, choose the addendum type, effective date, and terms. Both use the built-in signing/approval flow and pending signatures appear in home follow-ups.</p>
+
+        <h3 data-harry-link="/leases">How do I send a saved lease to a tenant?</h3>
+        <p>Open the lease record in Dashboard &gt; Leases. Choose <strong>Email lease</strong>. Confirm the tenant email and the lease PDF attachment, then send.</p>
+
+        <h3 data-harry-link="/">How do I send tenants their portal link?</h3>
+        <p>From APM Property Detail &gt; Tenant Portal, use Share Link (SMS, email, or system share). From the dashboard, open the property detail page and use the tenant portal control. Known tenants can also call the dedicated number and press 1 to receive the portal link by SMS.</p>
+
+        <h3 data-harry-link="/maintenance">How do tenants report maintenance?</h3>
+        <p>Tenants open their tenant portal and choose Maintenance Request, or open <code>/work-orders/:token</code> directly. They enter the issue, add details/photos, and submit. The landlord sees the request as a work order in APM and Dashboard.</p>
+
+        <h3 data-harry-link="/">How do tenants request move-out?</h3>
+        <p>Tenants open <code>/move-out/:token</code> from the portal. They enter planned date, forwarding address, and notes, then submit. The landlord sees the request on the property/lease and can confirm the move-out date and open Property Detail &gt; Move-Out Inspection to record condition.</p>
+
+        <h3 data-harry-link="/settings">How do I decide whether tenants can call me directly?</h3>
+        <p>Open Dashboard &gt; Settings &gt; Twilio Number or APM &gt; Settings &gt; Voice. Keep Automated tenant menu selected if tenants should self-serve first. Select Ring APM / phone during open hours if tenant calls should ring you directly. Quiet times default to 8 PM to 8 AM, including weekends, and play the outside-hours menu instead of ringing for routine calls.</p>
+
+        <h3 data-harry-link="/settings">How do I set up the Twilio number?</h3>
+        <p>In onboarding &gt; Communication, enter the preferred 3-digit area code, review the welcome SMS, then activate/provision. If approval is required, wait for status to become active. Then configure Dashboard &gt; Settings &gt; Twilio Number or APM Settings &gt; Voice before sending welcome texts.</p>
+
+        <h3 data-harry-link="/invoices">How do I add invoice emails?</h3>
+        <p>Open Dashboard &gt; Invoices to find your intake email. The account holder email is the default authorized sender. Authorized sender and alias management may be configured during onboarding or through support if the user interface does not show those controls. Add any owner, bookkeeper, property manager, LLC inbox, or forwarding email that will send invoices.</p>
+
+        <h3 data-harry-link="/invoices">How do I scan an invoice?</h3>
+        <p>Use Dashboard &gt; Invoices &gt; Upload from photos/files or use the APM invoice scan action. You can also email invoices to the intake address; APM scans them and places categorized drafts in the queue for review. Review vendor, amount, date, property, category, and duplicate warnings before routing the invoice.</p>
+
+        <h3 data-harry-link="/">Why did the app start in Sandbox?</h3>
+        <p>Sandbox is the first-time default so new users can try the product with sample data before entering real properties or tenants. Switch to Production when you are ready for real setup. You can switch back to Sandbox later to practice.</p>
+
+        <h3 data-harry-link="/">Why do I not see rent payments or financial reports?</h3>
+        <p>Online tenant rent collection and full financial reports (transactions, reconciliation, P&amp;L, balance sheet, general ledger, 1099) are out of beta scope and not available to beta accounts. Beta users have operational invoice intake, property expense tracking through work orders and routed invoices, and Schedule E report organization for tax-planning review. See the <a href="#rent-financial">Rent And Invoice Scope</a> section.</p>
+
+        <h3 data-harry-link="/reports">How do I export a report from APM?</h3>
+        <p>Open APM &gt; Reports, select the report, apply Scope or Period when the report supports them, tap Export, then choose PDF for a generated PDF file or Excel for an editable export. Regular exports include Assistant Property Manager version, generated date, signed-in user, LLC subtotals, report totals, and formula-backed Excel totals where applicable.</p>
+
+        <h3 data-harry-link="/reports">Where is the Schedule E report?</h3>
+        <p>Open Reports &gt; Schedule E in APM or Dashboard. The report groups supported expense rows by LLC, property, and Schedule E line with LLC subtotal rows and report totals. Harry can explain where the report data comes from, but tax treatment and filing decisions should be reviewed with a CPA or tax professional.</p>
+
+        <h3 data-harry-link="/reports">How do I track property expenses?</h3>
+        <p>Use work order actual costs and invoice intake to build the property expense record. In APM, open Reports &gt; Property Expense and filter by timeframe, LLC, or property. In the dashboard, use Reports &gt; Property Expenses or Maintenance filters to review costs before exporting.</p>
+
+        <h3 data-harry-link="/reports">How do I review invoices needing approval?</h3>
+        <p>Open APM &gt; Reports &gt; Invoice Approvals, or Dashboard &gt; Invoices. The list shows pending invoices from dashboard upload, APM scan, or authorized email intake. Review each invoice's extracted fields, open the invoice inline, edit row values if needed, sort by column headers, select one or many rows, and approve with the per-row approval buttons or Approve Selected.</p>
+
+        <h3 data-harry-link="/settings">Where do I see and edit my quick replies?</h3>
+        <p>APM &gt; Settings &gt; Quick Replies. Add a short title and body, save, then pick the reply from the Compose bar when sending messages.</p>
+
+        <h3 data-harry-link="/settings">Where is the APM health check and error log?</h3>
+        <p>APM &gt; Settings &gt; Support &gt; Health for backend/auth/sync status. APM &gt; Settings &gt; Support &gt; Error Log for recent client-side errors. Both are useful in a bug report.</p>
+
+        <h3 data-harry-link="/settings">How do I update APM?</h3>
+        <p>APM &gt; Settings &gt; Support &gt; About &gt; Check for update. If an OTA update is available, follow the prompt. For full app upgrades, reinstall from TestFlight (iOS) or the Android beta channel.</p>
+
+        <h3 data-harry-link="/">How do I report a bug?</h3>
+        <p>Use the APM feedback button or support channel. Include the screen, account mode, steps, expected result, actual result, property/tenant/work order if relevant, the most recent Error Log entry, and whether it blocks tenant communication or daily work.</p>
+
+        <h3 data-harry-link="/">How do I know if data changed in both APM and Dashboard?</h3>
+        <p>After saving, refresh the other app surface and open the same property, lease, work order, or tenant. APM and Dashboard use the same backend records, so successful saves should appear in both places.</p>
+
+        <h3 data-harry-link="/">What can I ask Harry?</h3>
+        <p>Anything inside the product: setup, properties, leases, lease renewals/addenda, tenants, work orders, messages, contacts, documents, invoice intake, property expenses, Schedule E report organization, operational reports, communication setup, tenant portal rollout, sandbox vs production, and bug reporting context. Harry will not give tax/legal/financial advice or answer general trivia.</p>
+      </section>
+
+      <footer>
+        <p>This manual is intentionally written for human users first. After approval, each <code>data-harry-section</code> can be chunked into Harry knowledge so the assistant can answer feature questions with the same step-by-step guidance. Each <code>data-harry-link</code> in the Q&amp;A points Harry at the dashboard route to surface as a clickable next step.</p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
